@@ -2,8 +2,19 @@ import "reflect-metadata";
 import AppDataSource from "./config/database.config.js";
 import express from "express";
 import Envconfig from "./config/Envconfig.ts";
+import cors from "cors"
+import cookieparser from "cookie-parser"
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cors(
+    {
+        origin: "http://localhost:5173",
+        credentials: true
+    }
+));
+app.use(cookieparser())
 
 AppDataSource.initialize().then(()=>{
     console.log("AppDataSource has been initialized");
