@@ -4,6 +4,8 @@ import Home from './pages/Home/Home'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import Useauthstore from './authstore/authstore'
+import './App.css'
+import Navbar from './components/Navbar/Navbar'
 
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
 
   return (
     <div>
+       
 
         <Routes>
             <Route path='/' element={ authstore ? <Home />  : <Navigate to={'/login'} />} />
