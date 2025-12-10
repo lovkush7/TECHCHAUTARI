@@ -6,7 +6,14 @@ class CheckController {
         req: Request,
         res: Response,
     ){
-        return await checkServices.check(req,res)
+       
+       try{
+        return res.json(req.user);
+
+       } catch(err){
+        console.log("the error is "+err)
+       }
+       // return await checkServices.check(req,res);
 
     }
 }

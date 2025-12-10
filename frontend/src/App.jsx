@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Links, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
@@ -14,7 +14,7 @@ const App = () => {
     },[check])
      console.log(ischeckingauth);
 
-    console.log("the error is "+authstore);
+    console.log("the user is ",authstore);
 
     if(ischeckingauth ){
         return <div>loading...</div>
@@ -26,9 +26,9 @@ const App = () => {
     <div>
 
         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
+            <Route path='/' element={ authstore ? <Home />  : <Navigate to={'/login'} />} />
+            <Route path='/login' element={ !authstore ? <Login /> : <Navigate to={"/"} /> } />
+            <Route path='/signup' element={!authstore ? <Signup /> : <Navigate to={"/"}/>} />
         </Routes>
       
     </div>

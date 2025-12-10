@@ -43,6 +43,10 @@ class SignupService {
 
       generateToken(res, newuser.id)
 
+      return {
+        newuser
+      }
+
         }catch(err){
             console.log("the error is "+err);
         }

@@ -7,8 +7,8 @@ import Useauthstore from '../../authstore/authstore';
 const Signup = () => {
     const [text , settext] = useState({
         Fullname: "",
-        Email: "",
-        Password: "",
+        email: "",
+        password: "",
     });
 
     const [error, seterror]=useState("")
@@ -60,8 +60,8 @@ const Signup = () => {
                 <label htmlFor="">Email</label>
                 <input
                  type="email"
-                 name='Email'
-                 value={text.Email}
+                 name='email'
+                 value={text.email}
                  onChange={handlechange}
                  placeholder='Enter the email'
                  required
@@ -72,8 +72,8 @@ const Signup = () => {
                 <label htmlFor="">Password</label>
                 <input
                  type="password"
-                 name='Password'
-                 value={text.Password}
+                 name='password'
+                 value={text.password}
                  onChange={handlechange}
                  placeholder='Enter the password'
                  required

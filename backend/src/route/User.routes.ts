@@ -9,7 +9,7 @@ const router = Router();
 router.post("/register",async(req,res)=>{
 
 const user = await signupController.signup(req,res);
-res.json({user})
+res.json({data: user})
 });
 
 router.post("/login",async(req,res)=>{
@@ -17,9 +17,8 @@ router.post("/login",async(req,res)=>{
     res.json({success: true, user});
 })
 
-router.get("/check",protectedroute,async(req,res)=>{
-    const user = await CheckController.checkuser(req,res);
-    res.json(user);
-})
+router.get("/check",protectedroute,CheckController.checkuser)
+   
+   
 
 export default router;

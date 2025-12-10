@@ -1,7 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken"
 import Envconfig from "../config/Envconfig.ts";
-import { decode } from "punycode";
 import { User } from "../entities/User.entities.ts";
 
 declare module "express-serve-static-core"{
@@ -21,13 +20,13 @@ const protectedroute =async (
         const token = req.cookies.jwt;
 
         if(!token){
-            return {success: false,status: 301, message: "token not provided "}
+            return res.status(301).json({success: false,status: 301, message: "token not provided "})
         }
         
          const decode = jwt.verify(token,Envconfig.JWT_SECRET!);
 
            if(!decode){
-            return {success: false, message: "token expired"}
+            return res.json({success: false, message: "token expired"})
 
         }
         const {userid} = decode as {userid: string}
@@ -40,14 +39,16 @@ const protectedroute =async (
     })
 
     if(!user){
-        return {success: false , message: "user not found "}
+        return res.json({success: false , message: "user not found "})
     }
     req.user = user;
+
+    return next();
   
       
     }catch(err){
         console.log("the error is"+err);
-        return {success: false , messages: 'intrnal server error'}
+        return res.json({success: false , messages: 'intrnal server error'})
     }
 
   

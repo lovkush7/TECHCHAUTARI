@@ -6,9 +6,8 @@ import Useauthstore from '../../authstore/authstore';
 
 const Login = () => {
     const [text , settext] = useState({
-        Fullname: "",
-        Email: "",
-        Password: "",
+        email: "",
+        password: "",
     });
 
     const [error, seterror]=useState("")
@@ -36,7 +35,7 @@ const Login = () => {
     }
   return (
     <div className='container'>
-        <form className='form' action="">
+        <form className='form' action="" onSubmit={handlesubmit}>
             <div className="header-part">
               <img style={{width:"6rem", height:"6rem"}} src="./Teech.png" alt="" />
               <h2>WELCOME BACK</h2>
@@ -49,8 +48,8 @@ const Login = () => {
                 <label htmlFor="">Email</label>
                 <input
                  type="email"
-                 name='Email'
-                 value={text.Email}
+                 name='email'
+                 value={text.email}
                  onChange={handlechange}
                  placeholder='Enter the email'
                  required
@@ -61,14 +60,14 @@ const Login = () => {
                 <label htmlFor="">Password</label>
                 <input
                  type="password"
-                 name='Password'
-                 value={text.Password}
+                 name='password'
+                 value={text.password}
                  onChange={handlechange}
                  placeholder='Enter the password'
                  required
                  />
             </div>
-            <button className='btn'>login</button>
+            <button className='btn' type='submit'>login</button>
           <center>  <p className='bottom-type' style={{}}>Don't have an account? <Link to="/signup">signup</Link></p></center>
 
         </form>

@@ -17,6 +17,13 @@ class Envconfig {
    //jwtsec
    static JWT_SECRET = process.env.JWT_SECRET;
 
+
+   //CLOUDNARY
+   static CLOUD_NAME = process.env.CLOUD_NAME;
+   static CLOUD_API_KEY = process.env.CLOUD_API_KEY;
+   static CLOUD_API_SECRET = process.env.CLOUD_API_SECRET;
+
+
 }
 export default Envconfig;
 

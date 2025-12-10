@@ -1,7 +1,8 @@
-import { BeforeInsert, Column, Entity } from "typeorm";
+import { BeforeInsert, Column, Entity, JoinColumn, OneToOne } from "typeorm";
 import Commonentities from "./Common.entities.ts";
 import bcrypt from "bcrypt"
 import { Role } from "../enums/Role.enums.ts";
+import { UserProfile } from "./Profile/Userprofile.entities.ts";
 
 @Entity()
 export class User extends Commonentities{
@@ -17,6 +18,10 @@ export class User extends Commonentities{
 
     @Column({type:"enum",enum:Role,default:Role.USER})
     Role: Role;
+
+    @OneToOne(()=>UserProfile, (profile)=>profile.user)
+    @JoinColumn()
+    profile: UserProfile;
 
     @BeforeInsert()
     _(){

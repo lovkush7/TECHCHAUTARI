@@ -3,7 +3,7 @@ import api from "../api/api";
 
 const Useauthstore = create((set,get)=>({
     authstore: null,
-      ischeckingauth: true,
+    ischeckingauth: true,
     isLoggingup: false,
     isSiginingup: false,
     isupdatingprofile: false,
@@ -13,28 +13,27 @@ const Useauthstore = create((set,get)=>({
 
     check: async()=>{
         try{
-            // set({ischeckingauth: true});
 
             const res = await api.get("/auth/check");
             set({authstore: res.data})
             console.log(res);
+            
 
         }catch(err){
             set({authstore:null})
-            console.log(err)
+            console.log(err);
         }finally{
-            set({ischeckingauth: false});
-
+            set({ischeckingauth: false})
         }
-
     },
 
     signup: async(data)=>{
         try{
             set({isSiginingup: true});
 
-            const res = await api.post("/auth/signup",data);
+            const res = await api.post("/auth/register",data);
             set({authstore: res.data})
+            console.log(res.data);
             
         }catch(err){
             console.log("the error is "+err);
@@ -47,7 +46,7 @@ const Useauthstore = create((set,get)=>({
 
     login: async(data)=>{
         try{
-            set({isLoggingup});
+            set({isLoggingupa: true});
             const res = await api.post("/auth/login",data);
             set({authstore: res.data})
          

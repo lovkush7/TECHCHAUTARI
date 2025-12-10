@@ -6,7 +6,8 @@ class CheckServices {
         res: Response
     ){
         try{
-            return req.user;
+            res.status(200).json(req.user) ;
+            console.log(req.user);
 
         }catch(err){
             console.log("the error is "+err)
