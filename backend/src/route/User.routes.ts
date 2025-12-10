@@ -3,6 +3,7 @@ import signupController from "../controller/register/signup.controller.ts";
 import loginController from "../controller/login/login.controller.ts";
 import protectedroute from "../middleware/protectedroute.ts";
 import CheckController from "../controller/check/Check.controller.ts";
+import profileController from "../controller/profile/profile.controller.ts";
 
 const router = Router();
 
@@ -17,7 +18,13 @@ router.post("/login",async(req,res)=>{
     res.json({success: true, user});
 })
 
-router.get("/check",protectedroute,CheckController.checkuser)
+router.get("/check",protectedroute,CheckController.checkuser);
+
+
+router.put("/update",protectedroute,async(req,res)=>{
+    const user = await profileController.Profile(req,res);
+    res.status(200).json({ data: user})
+})
    
    
 
