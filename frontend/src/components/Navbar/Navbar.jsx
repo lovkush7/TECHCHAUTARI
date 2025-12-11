@@ -6,48 +6,48 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import { BsChatRightDots } from "react-icons/bs";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const [menu , setmenu] = useState("Home");
+  // const [menu , setmenu] = useState("Home");
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const menu = location.pathname;
   return (
     <div className='navbar'>
       <img style={{width:"4rem", height:"4rem"}} src="./Teech.png" alt="png" className="logo" />
       <ul className="navbar-menu">
         <li onClick={()=>{
-          setmenu("Home");
-          // <Link to={"/chat"} />
-          navigate("/")
-          
-        
+          navigate("/");
         }}
-         className={menu === "Home"? "active":""}
+         className={menu === "/"? "active":""}
         style={{display:"flex",flexDirection:"column", justifyContent:"center", alignItems:'center',gap:"4px"}}>
             <HiHome style={{fontSize:'1.5rem',}}/>
             Home
         </li>
-        <li onClick={()=>{setmenu("Network");    navigate("/")}}
-        className={menu === "Network" ? "active": ""}
+        <li 
+        className={menu === "/network" ? "active": ""}
+        onClick={()=>{ navigate("/network")}}
         style={{display:"flex",flexDirection:"column",justifyContent:"center", alignItems:'center',gap:"4px"}}>
             <IoPeopleSharp style={{fontSize:'1.5rem'}} />
             Network 
         </li>
-        <li onClick={()=>setmenu("Jobs")}
-         className={menu === "Jobs"? "active": ""}
+        <li onClick={()=>navigate("/jobs")}
+         className={menu === "/jobs"? "active": ""}
         style={{display:"flex",flexDirection:"column",justifyContent:"center", alignItems:'center',gap:"4px"}}>
             <BsPersonWorkspace  style={{fontSize:'1.5rem'}}  />
             Jobs
         </li>
-        <li onClick={()=>{setmenu("Messenger");   
+        <li onClick={()=>{  
          navigate("/chat")}}
-         className={menu === "Messenger"?"active": ""}
+         className={menu === "/chat"?"active": ""}
         style={{display:"flex",flexDirection:"column",justifyContent:"center", alignItems:'center',gap:"4px"}}>
             <BsChatRightDots style={{fontSize:'1.5rem'}}  />
             Messenger
         </li>
-        <li  onClick={()=>setmenu("notifications")}
-        className={menu === "notifications"?"active":""}
+        <li  onClick={()=>navigate("/notification")}
+        className={menu === "/notification"?"active":""}
          style={{display:"flex",flexDirection:"column",justifyContent:"center", alignItems:'center',gap:"4px"}}>
             <IoNotificationsOutline   style={{fontSize:'1.5rem'}} />
           notifications

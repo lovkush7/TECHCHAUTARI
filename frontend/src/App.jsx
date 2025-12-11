@@ -7,6 +7,9 @@ import Useauthstore from './authstore/authstore'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Chat from './pages/chat/chat'
+import Network from './pages/Network/Network'
+import Jobs from './pages/Jobs/Jobs'
+import Notification from './pages/Notification/Notification'
 // import Chat from './components/chatbox/Chat'
 
 
@@ -35,6 +38,9 @@ const App = () => {
             <Route path='/login' element={ !authstore ? <Login /> : <Navigate to={"/"} /> } />
             <Route path='/signup' element={!authstore ? <Signup /> : <Navigate to={"/"}/>} />
             <Route path='/chat' element={<Chat/>}/>
+            <Route path='/network' element={<Network/>}/>
+            <Route path='/jobs' element={<Jobs/>}/>
+            <Route path='/notification' element={<Notification/>}/>
           
         </Routes>
       
