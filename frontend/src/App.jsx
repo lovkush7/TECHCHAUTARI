@@ -6,6 +6,8 @@ import Signup from './pages/signup/Signup'
 import Useauthstore from './authstore/authstore'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
+import Chat from './pages/chat/chat'
+// import Chat from './components/chatbox/Chat'
 
 
 const App = () => {
@@ -32,6 +34,8 @@ const App = () => {
             <Route path='/' element={ authstore ? <Home />  : <Navigate to={'/login'} />} />
             <Route path='/login' element={ !authstore ? <Login /> : <Navigate to={"/"} /> } />
             <Route path='/signup' element={!authstore ? <Signup /> : <Navigate to={"/"}/>} />
+            <Route path='/chat' element={<Chat/>}/>
+          
         </Routes>
       
     </div>

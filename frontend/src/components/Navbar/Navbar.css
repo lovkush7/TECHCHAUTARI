@@ -13,3 +13,9 @@
     cursor: pointer;
 
 }
+.navbar-menu .active{
+    padding-bottom: 4px;
+    /* border-bottom: 2px solid #49557e; */
+     border-bottom: 2px solid #000;
+     color: #000;
+}
