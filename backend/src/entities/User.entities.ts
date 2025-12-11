@@ -1,10 +1,16 @@
+
 import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
+
+// import { BeforeInsert, Column, Entity, JoinColumn, OneToOne } from "typeorm";
+
 import Commonentities from "./Common.entities.ts";
 import bcrypt from "bcrypt"
 import { Role } from "../enums/Role.enums.ts";
 import { UserProfile } from "./Userprofile.entities.ts";
+
 import { Messages } from "./messages.entities.ts";
 // import { messages } from "./messages.entities.ts";
+
 
 @Entity()
 export class User extends Commonentities{
@@ -25,12 +31,12 @@ export class User extends Commonentities{
     @JoinColumn()
     profile: UserProfile;
 
+
     @OneToMany(()=>Messages,(messages)=>messages.sender)
     sendMessages: Messages[];
 
     @OneToMany(()=>Messages,(messages)=>messages.reciver)
     recivedMessages: Messages[];
-
 
     @BeforeInsert()
     _(){
