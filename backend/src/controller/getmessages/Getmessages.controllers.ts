@@ -6,7 +6,7 @@ class GetmessagesController {
         req: Request,
         res: Response
     ){
-        return await GetmessagesServices.getmessage()
+        return await GetmessagesServices.getmessage(req,res)
     }
 }
 export default new GetmessagesController();
