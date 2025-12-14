@@ -1,10 +1,10 @@
-import type { Response } from "express";
+import type { Request, Response } from "express";
 import type { AuthenticateRequest } from "../../Type/Authenticatereq.ts";
 import { User } from "../../entities/User.entities.ts";
 
 class GetUsersServices {
     async getusers(
-        req: AuthenticateRequest,
+        req: Request,
         res: Response
     ){
         try{

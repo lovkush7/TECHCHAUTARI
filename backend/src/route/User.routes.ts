@@ -40,13 +40,13 @@ router.get("/getusers",protectedroute,async(req,res)=>{
 // >>>>>>> a3c04943124ba8f65b6a82a433557a6c782a1abb
 })
 
-router.post("/sendmessages",protectedroute,async(req,res)=>{
+router.post("/sendmessages/:id",protectedroute,async(req,res)=>{
 const user = await SendmessageControllers.sendmessages(req,res);
 // return {success: true, data: user}
 res.json({data: user})
 })
    
-router.get("/getmessages",protectedroute,async(req,res)=>{
+router.get("/getmessages/:id",protectedroute,async(req,res)=>{
 const user = await GetmessagesControllers.getmessages(req,res);
 res.json({data: user})
 })

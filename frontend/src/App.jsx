@@ -10,16 +10,20 @@ import Chat from './pages/chat/chat'
 import Network from './pages/Network/Network'
 import Jobs from './pages/Jobs/Jobs'
 import Notification from './pages/Notification/Notification'
+import Usemessages from './authstore/messagesstore'
 // import Chat from './components/chatbox/Chat'
 
 
 const App = () => {
     const {authstore,check,ischeckingauth} = Useauthstore();
+    const {getusers,Users} = Usemessages();
 
     useEffect(()=>{
         check();
-    },[check])
+        getusers();
+    },[check,getusers])
      console.log(ischeckingauth);
+     console.log( "the users are"+Users)
 
     console.log("the user is ",authstore);
 
