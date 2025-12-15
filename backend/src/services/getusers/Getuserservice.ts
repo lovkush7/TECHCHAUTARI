@@ -14,12 +14,13 @@ class GetUsersServices {
                 return {status:401, success:false, messages:"unauthorized"}
             }
             const filteruser = await User.createQueryBuilder("user")
+            .leftJoin("user.profile", "profile")
             .where("user.id != :id",{id: String(logedinuser)})
             .select([
                 "user.id",
                 "user.Fullname",
                 "user.email",
-                "user.profile"
+                "profile.profilepic"
             ]).getMany();
 
             if(!filteruser){

@@ -23,7 +23,7 @@ const App = () => {
         getusers();
     },[check,getusers])
      console.log(ischeckingauth);
-     console.log( "the users are"+Users)
+     console.log( "the users are",Users)
 
     console.log("the user is ",authstore);
 

@@ -7,6 +7,7 @@ const Useauthstore = create((set,get)=>({
     isLoggingup: false,
     isSiginingup: false,
     isupdatingprofile: false,
+    Onlineusers: [],
   
 
 

@@ -45,6 +45,10 @@ const Usemessages = create((set,get)=>({
         }catch(err){
             console.log("the error is "+err)
         }
+    },
+    setselectedusers: async(selectedUsers)=>{
+        set({selectedUsers})
+
     }
 
 
