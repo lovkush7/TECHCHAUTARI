@@ -1,6 +1,9 @@
 import React from 'react'
 import Usemessages from '../../../controlauth/msgstroe'
 import Authcontrol from '../../../controlauth/authcontrol';
+import "./Chatheader.css"
+import { Cross, CrosshairIcon, CrossIcon } from 'lucide-react';
+import { IoClose } from 'react-icons/io5';
 
 const ChatHeader = () => {
     const {Users ,selectedUsers,setselectedUsers } = Usemessages();
@@ -13,8 +16,8 @@ const ChatHeader = () => {
                     <img style={{width:"2rem",height:"2rem"}} src={selectedUsers?.profile ||"./profile.jpg"  } alt="photo xinna ra" />
                 </div>
           
-            <div>
-            <h3 className="user-name">
+            <div style={{marginBottom:'0'}}>
+            <h3 className="user-name"  >
                 {selectedUsers?.Fullname}
                
             </h3>
@@ -24,7 +27,7 @@ const ChatHeader = () => {
         </div>
         </div>
         <button style={{outline:"none",border:"none"}} onClick={()=>setselectedUsers(null)}>
-            X
+            <IoClose size={20} style={{backgroundColor:"transparent"}}/>
         </button>
           </div>
       

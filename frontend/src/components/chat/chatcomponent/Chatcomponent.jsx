@@ -3,7 +3,9 @@ import ChatHeader from '../chatheader/chatHeader'
 
 const Chatcomponent = () => {
   return (
-    <div>
+    <div style={{display:"flex",flexDirection:"column",flex:"1",overflow:"auto"
+
+    }}>
       <ChatHeader/>
         
       
