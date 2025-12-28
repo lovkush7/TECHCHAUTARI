@@ -32,16 +32,17 @@ jobs:
           with:
             context: ./backend
             push: true
-            tags: lovekarki/backend:latest
+            tags: lovekarki/myapp:latest
             file: ./backend/Dockerfile
 
         
-        - name: trivy valunabalities scan
-          uses: aquasecurity/trivy-action@v0.33.1 
+        - name: trivy valunabalities scanning
+          uses: aquasecurity/trivy-action@v0.33.1
           with:
-            scan-type: "fs"
-            scan-ref: "."
+            scan-type: "image"
+            scan-ref: "lovekarki/myapp:latest"
             format: 'table'
             vuln-type: "os,library"
             ignore-unfixed: true
-            severity: "CRITICAL,HIGH"     
+
+ 
