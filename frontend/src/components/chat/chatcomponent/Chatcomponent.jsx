@@ -1,5 +1,6 @@
 import React from 'react'
 import ChatHeader from '../chatheader/chatHeader'
+import Chatinput from '../chat_inputbox/chatinput'
 
 const Chatcomponent = () => {
   return (
@@ -7,6 +8,7 @@ const Chatcomponent = () => {
 
     }}>
       <ChatHeader/>
+      <Chatinput/>
         
       
     </div>
