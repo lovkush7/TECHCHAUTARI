@@ -10,11 +10,14 @@ const fileinputref = useRef();
 
 
 const handleimage =(e)=>{
-    const file = e.target.files[0]
+   
+    const file = e.target.files[0];
     if(!file.type.startsWith("image/")){
+            console.log("not an image file");
 
         return;
-}
+    }
+       
      const reader = new FileReader()
      reader.onload=()=>{
          setimage(reader.result)
@@ -28,7 +31,9 @@ const handleimage =(e)=>{
       setimage(null);
 
     }
-    const handlemessages =()=>{
+    const handlemessages =(e)=>{
+      e.preventDefault();
+      console.log(Message,image);
 
     }
 
@@ -38,14 +43,14 @@ const handleimage =(e)=>{
         <div className="preview-wrapper">
           <div className="preview-box">
             <img src={image} alt="img" className='preview-image' />
-            <button type='submit ' className='remove-btn' >
+            <button type='submit' className='remove-btn' >
               <span onClick={removeimages} className='remove-icons'>X</span>
 
             </button>
           </div>
         </div>
        )}
-       <form action="" className="from-row">
+       <form  onSubmit={handlemessages}action="" className="from-row">
          <div className="grow">
           <input type="text" 
           placeholder="Type a message..."

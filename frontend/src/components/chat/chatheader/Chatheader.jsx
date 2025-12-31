@@ -26,8 +26,8 @@ const ChatHeader = () => {
             </p>
         </div>
         </div>
-        <button style={{outline:"none",border:"none"}} onClick={()=>setselectedUsers(null)}>
-            <IoClose size={20} style={{backgroundColor:"transparent"}}/>
+        <button style={{outline:"none",border:"none",background:"transparent",backgroundColor:"white",fontSize:"1rem"}} onClick={()=>setselectedUsers(null)}>
+            {/* <IoClose size={20} style={{backgroundColor:"transparent"}}/> */}X
         </button>
           </div>
       

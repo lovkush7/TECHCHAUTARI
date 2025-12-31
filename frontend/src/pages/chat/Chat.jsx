@@ -4,6 +4,7 @@ import "./Chat.css"
 import Sidebar from '../../components/sidebar/Sidebar'
 import Chatcomponent from '../../components/chat/chatcomponent/Chatcomponent'
 import Usemessages from '../../controlauth/msgstroe'
+import Nochatselected from '../../components/chat/nochatselected/Nochatselected'
 
 const Chat = () => {
   const {selectedUsers} = Usemessages();
@@ -15,7 +16,7 @@ const Chat = () => {
             <div className="chat-card">
               <div className="chat-container">
                 <Sidebar/>
-              {!selectedUsers ? "no chat selected" : <Chatcomponent/>}  
+              {!selectedUsers ? <Nochatselected/> : <Chatcomponent/>}  
 
               </div>
             </div>

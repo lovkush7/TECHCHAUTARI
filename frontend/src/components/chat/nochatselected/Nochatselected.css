@@ -1,0 +1,33 @@
+.no-chat-selected{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 4rem;
+    flex: 1;
+    background-color: rgba(243, 244, 246, 0.5);
+}
+.content{
+    max-width: 82rem;
+    text-align: center;
+}
+.icon-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.chath1{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+
+}
+.chatp{
+    font-size: 1rem;
+    color: #4B5563;
+    margin: 0.5rem;
+}

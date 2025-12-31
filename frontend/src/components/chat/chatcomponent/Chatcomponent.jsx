@@ -8,6 +8,7 @@ const Chatcomponent = () => {
 
     }}>
       <ChatHeader/>
+      
       <Chatinput/>
         
       
