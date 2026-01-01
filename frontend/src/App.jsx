@@ -20,6 +20,7 @@ const App = () => {
     // const {authstore,chec,ischeckingauth,checkroute} = Useauthstore();
     const {getusers,Users} = Usemessages();
     const {check,authUser,ischeckingauth} = Authcontrol();
+    const {getmessages,messages} = Usemessages()
 
     // useEffect(()=>{
     //   checkroute();
@@ -30,7 +31,9 @@ const App = () => {
     useEffect(()=>{
       check();
       getusers();
-    },[check,getusers])
+      getmessages()
+    },[check,getusers,getmessages])
+    console.log("the messages are ",messages);
      console.log(ischeckingauth);
      console.log( "the users are",Users);
       console.log( "the users ara",Users.data)
