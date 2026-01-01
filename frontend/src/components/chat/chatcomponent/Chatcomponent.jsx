@@ -10,6 +10,7 @@ const Chatcomponent = () => {
    const MessageEndref = useRef(null);
     
     useEffect(()=>{
+      if(!selectedUsers?.id) return;
       getmessages(selectedUsers.id);
     },[getmessages])
 
@@ -25,10 +26,23 @@ const Chatcomponent = () => {
 
             <div className="chat-image avatar">
               <div className="avatar-img">
-                <img src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : selectedUsers.profile || './profile.jpg'} alt="" />
+                <img src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : 
+                  selectedUsers.profile || './profile.jpg'} alt="" />
               </div>
             </div>
-
+                <div className="chat-header">
+                  <time datetime="">
+                    {Formatmessagetime(msg.createdAt)}
+                  </time>
+                  <div className="chat-bubble">
+                    {msg.image && (
+                      <img src={msg.image} alt="" />
+                    )}
+                    {msg.text && (
+                      <p>{msg.text}</p>
+                    )}
+                  </div>
+                </div>
           </div>
         ))}
       </div>

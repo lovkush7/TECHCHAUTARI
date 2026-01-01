@@ -27,8 +27,8 @@ const Usemessages = create((set,get)=>({
     getmessages: async(userid)=>{
         try{
             set({ismessageloading: true})
-            const res= await api.get(`/auth/getmessages/${userid}`);
-            set({messages: res.data});
+            const res= await api.get(`/auth/getmessage/${userid}`);
+            set({messages: res.data.data});
 
         }catch(err){
             console.log("the error is "+err)

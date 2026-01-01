@@ -31,9 +31,9 @@ const App = () => {
     useEffect(()=>{
       check();
       getusers();
-      getmessages()
-    },[check,getusers,getmessages])
-    console.log("the messages are ",messages);
+      // getmessages()
+    },[check,getusers])
+    // console.log("the messages are ",messages);
      console.log(ischeckingauth);
      console.log( "the users are",Users);
       console.log( "the users ara",Users.data)

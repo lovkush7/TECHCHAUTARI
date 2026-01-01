@@ -1,12 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { Image, SendIcon } from "lucide-react"
 import "./Chatinput.css"
+import Usemessages from '../../../controlauth/msgstroe';
 
 const Chatinput = () => {
 
 const [Message, setMessage] = useState("");
 const [image,setimage] = useState(null);
 const fileinputref = useRef();
+
+const {sendmessages} = Usemessages()
 
 
 const handleimage =(e)=>{
@@ -29,11 +32,31 @@ const handleimage =(e)=>{
     }
     const removeimages =(e)=>{
       setimage(null);
+      if(fileinputref.current){
+        fileinputref.current.value="";
+      }
 
     }
     const handlemessages =(e)=>{
       e.preventDefault();
-      console.log(Message,image);
+      if(!Message && !image)
+        return;
+
+      try{
+        sendmessages({
+          text: Message.trim(),
+          images: image
+        })
+        setMessage("");
+        setimage(null);
+        if(fileinputref.current){
+          fileinputref.current.value="";
+        }
+
+      }catch(err){
+        console.log("the error is "+err)
+      }
+      
 
     }
 

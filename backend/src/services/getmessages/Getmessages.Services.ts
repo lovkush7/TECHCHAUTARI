@@ -17,7 +17,7 @@ class GetmessagesServices {
                 return {success: false, status:301, messages: "unautorized user"}
             }
             const messages = await Messages.createQueryBuilder("mess")
-            .where("(mess.senderId = :myid AND mess.reciverId = :usertosend) OR (mess.senderId = :usertosend AND mess.reviverId = :myid)",{myid,usertosend})
+            .where("(mess.senderId = :myid AND mess.reciverId = :usertosend) OR (mess.senderId = :usertosend AND mess.reciverId = :myid)",{myid,usertosend})
             .orderBy("mess.createdAt","ASC")
             .getMany()
 
