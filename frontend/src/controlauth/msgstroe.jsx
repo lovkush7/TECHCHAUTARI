@@ -14,21 +14,22 @@ const Usemessages = create((set,get)=>({
             set({isuserloading: true})
             const res = await api.get("/auth/getuser");
             set({Users: res.data.data});
-            console.log("the users from backend",res.data);
+            // console.log("the users from backend",res.data);
 
         }catch(err){
             console.log("the error is"+err);
 
         }finally{
-            set({isuserloading: false})
+            set({isuserloading: false});
         }
     },
 
     getmessages: async(userid)=>{
         try{
             set({ismessageloading: true})
-            const res= await api.get(`/auth/getmessage/${userid}`);
+            const res= await api.get(`/auth/messagesget/${userid}`);
             set({messages: res.data.data});
+            console.log("the message",res.data);
 
         }catch(err){
             console.log("the error is "+err)

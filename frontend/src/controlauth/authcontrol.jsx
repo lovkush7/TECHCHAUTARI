@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import api from "../api/api";
 
-const Authcontrol = create((set)=>({
+const Authcontrol = create((set,get)=>({
     authUser: null ,
     ischeckingauth: false,
     isloggingin: false,
@@ -16,6 +16,7 @@ const Authcontrol = create((set)=>({
             const res = await api.get("/auth/checkroute");
             set({authUser: res.data})
             console.log(res);
+             get().connectSocket()
 
         }catch(err){
             console.log("the error is "+err)
@@ -30,6 +31,7 @@ const Authcontrol = create((set)=>({
             const res = await api.post("/auth/login", data);
             set({authUser: res.data});
             console.log(res);
+            get().connectSocket()
 
         }catch(err){
             console.log("the error is "+err)
@@ -44,12 +46,16 @@ const Authcontrol = create((set)=>({
             const res = await api.post("/auth/register", data);
             set({authUser: res.data});
             console.log(res);
+             get().connectSocket()
 
         }catch(err){
             console.log("the error is "+err)
         }finally{
             set({issigningup: false});
         }
-    }
+    },
+    connectSocket: async()=>{
+
+    },
 }));
 export default Authcontrol;

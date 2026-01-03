@@ -5,8 +5,9 @@ import Envconfig from "./config/Envconfig.ts";
 import cors from "cors"
 import cookieparser from "cookie-parser"
 import router from "./route/User.routes.ts";
+import { app , server} from "./config/socket.config.ts";
 
-const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors(
@@ -20,7 +21,7 @@ app.use(cookieparser())
 AppDataSource.initialize().then(()=>{
     console.log("AppDataSource has been initialized");
     app.use("/auth",router)
-    app.listen(Envconfig.SERVER_PORT || 8000,()=>{
+    server.listen(Envconfig.SERVER_PORT || 8000,()=>{
        console.log("server is running on port"+Envconfig.SERVER_PORT)
     })
 })

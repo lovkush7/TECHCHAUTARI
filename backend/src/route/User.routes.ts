@@ -45,7 +45,7 @@ const user = await SendmessageControllers.sendmessages(req,res);
 res.json({data: user})
 })
    
-router.get("/getmessage/:id",protectedroute,async(req,res)=>{
+router.get("/messagesget/:id",protectedroute,async(req,res)=>{
 const user = await GetmessagesControllers.getmessages(req,res);
 res.json({data: user})
 });
