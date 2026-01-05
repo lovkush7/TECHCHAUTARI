@@ -40,7 +40,7 @@ const Chatcomponent = () => {
                     )}
                     {msg.text && (
                       <div className={`chat-bubble ${msg.senderId === authUser.id ? "chat-bubble-primary text-white" : "bg-base-300 "} max-w-xs `}>
-                      <p>{msg.text}</p>
+                      <p style={{fontSize:"1rem"}}>{msg.text}</p>
                       </div>
                     )}
                   </div>

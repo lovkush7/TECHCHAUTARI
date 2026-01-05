@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import api from "../api/api";
+import io from "socket.io-client"
 
 const Authcontrol = create((set,get)=>({
     authUser: null ,
@@ -8,6 +9,7 @@ const Authcontrol = create((set,get)=>({
     issigningup: false,
     isupdatingprofile: false,
     onlineusers: [],
+    socket: null,
 
 
     check: async()=>{
@@ -55,7 +57,19 @@ const Authcontrol = create((set,get)=>({
         }
     },
     connectSocket: async()=>{
+        const {authUser} = get()
 
+        if(!authUser || get().socket?.connected) return;
+
+       const socket = io("http://localhost:8000");
+       socket.connect();
+      set({socket: socket})
     },
+    disconnectSocket: async()=>{
+
+        if(get().socket?.connected) get().socket.disconnect();
+        
+    },
+
 }));
 export default Authcontrol;
