@@ -16,7 +16,7 @@ export class Messages extends Commonentities{
     @Column({type:"text"})
     text?: string;
 
-    @Column({type:"text"})
+    @Column({type:"text", nullable: true})
     image?: string;
 
 }

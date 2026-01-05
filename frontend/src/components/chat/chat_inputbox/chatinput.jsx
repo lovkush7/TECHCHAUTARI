@@ -37,6 +37,9 @@ const handleimage =(e)=>{
       }
 
     }
+    // const callmessage = (e)=>{
+    //    console.log(e.target.value)
+    // }
     const handlemessages =(e)=>{
       e.preventDefault();
       if(!Message && !image)
@@ -78,9 +81,9 @@ const handleimage =(e)=>{
           <input type="text" 
           placeholder="Type a message..."
           className='input-text'
-           value={Message} 
+           value={Message}
            onChange={
-            (e)=>setMessage(e.target.value)
+             (e)=>setMessage(e.target.value)
             } />
 
             <input type="file"
@@ -89,7 +92,7 @@ const handleimage =(e)=>{
             className='hidden' 
              onChange={handleimage}
              />
-              <button type='submit' 
+              <button type='button' 
               className={`btnn btn-circle btn-sm-hidden ${image ? 'text-emerald-500' : 'text-zinc-500'}`}
                onClick={()=>{fileinputref.current?.click()}}>
                <Image size={22} />

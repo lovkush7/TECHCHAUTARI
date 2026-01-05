@@ -3,6 +3,7 @@ import ChatHeader from '../chatheader/chatHeader'
 import Chatinput from '../chat_inputbox/chatinput'
 import Usemessages from '../../../controlauth/msgstroe'
 import Authcontrol from '../../../controlauth/authcontrol'
+import { Formatmessagetime } from '../../../../utils/Formatetime'
 
 const Chatcomponent = () => {
    const {messages,selectedUsers,getmessages} = Usemessages();
@@ -12,7 +13,7 @@ const Chatcomponent = () => {
     useEffect(()=>{
       if(!selectedUsers?.id) return;
       getmessages(selectedUsers.id);
-    },[getmessages])
+    },[selectedUsers?.id, getmessages])
 
   return (
     <div style={{display:"flex",flexDirection:"column",flex:"1",overflow:"auto"
@@ -26,17 +27,17 @@ const Chatcomponent = () => {
 
             <div className="chat-image avatar">
               <div className="avatar-img">
-                <img src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : 
+                <img style={{width:"2rem",height:"2rem"}} src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : 
                   selectedUsers.profile || './profile.jpg'} alt="" />
               </div>
             </div>
                 <div className="chat-header">
                   <time datetime="">
-                    {Formatmessagetime(msg.createdAt)}
+                    {Formatmessagetime(msg.createdat)}
                   </time>
                   <div className="chat-bubble">
                     {msg.image && (
-                      <img src={msg.image} alt="" />
+                      <img style={{width:"5rem",height:"5rem"}} src={msg.image} alt="" />
                     )}
                     {msg.text && (
                       <p>{msg.text}</p>

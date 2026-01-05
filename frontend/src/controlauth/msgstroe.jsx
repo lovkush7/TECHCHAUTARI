@@ -37,11 +37,11 @@ const Usemessages = create((set,get)=>({
             set({ismessageloading:false})
         }
     },
-    sendmesage: async(messagedata)=>{
+    sendmessages: async(messagedata)=>{
         try{
             const {messages,selectedUsers} = get();
 
-            const response  = await api.post(`/auth/sendmessages/${selectedUsers}`,messagedata);
+            const response  = await api.post(`/auth/sendmessages/${selectedUsers.id}`,messagedata);
             set({messages: [...messages, response.data]})
 
         }catch(err){
