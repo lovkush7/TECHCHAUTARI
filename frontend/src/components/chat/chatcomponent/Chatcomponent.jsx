@@ -4,6 +4,7 @@ import Chatinput from '../chat_inputbox/chatinput'
 import Usemessages from '../../../controlauth/msgstroe'
 import Authcontrol from '../../../controlauth/authcontrol'
 import { Formatmessagetime } from '../../../../utils/Formatetime'
+import "./Chatcomonent.css"
 
 const Chatcomponent = () => {
    const {messages,selectedUsers,getmessages} = Usemessages();
@@ -23,26 +24,29 @@ const Chatcomponent = () => {
       <div className="chat-messages">
         {messages.map((msg)=>(
           <div key={msg.id}
-          className={`chat ${msg.senderId === authUser.id ? "start" : "end"}`}>
+          className={`chat ${msg.senderId === authUser.id ? "chat-start" : "chat-end"}`}>
 
             <div className="chat-image avatar">
               <div className="avatar-img">
-                <img style={{width:"2rem",height:"2rem"}} src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : 
+                <img style={{width:"100%",height:"100%",objectFit:"cover"}} src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : 
                   selectedUsers.profile || './profile.jpg'} alt="" />
               </div>
             </div>
                 <div className="chat-header">
-                  <time datetime="">
-                    {Formatmessagetime(msg.createdat)}
-                  </time>
+                 
                   <div className="chat-bubble">
                     {msg.image && (
-                      <img style={{width:"5rem",height:"5rem"}} src={msg.image} alt="" />
+                      <img style={{width:"7rem",height:"7rem"}} src={msg.image} alt="" />
                     )}
                     {msg.text && (
+                      <div className={`chat-bubble ${msg.senderId === authUser.id ? "chat-bubble-primary text-white" : "bg-base-300 "} max-w-xs `}>
                       <p>{msg.text}</p>
+                      </div>
                     )}
                   </div>
+                   <time datetime="">
+                    {Formatmessagetime(msg.createdat)}
+                  </time>
                 </div>
           </div>
         ))}
