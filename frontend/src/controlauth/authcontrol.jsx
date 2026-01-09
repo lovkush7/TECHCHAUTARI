@@ -61,9 +61,18 @@ const Authcontrol = create((set,get)=>({
 
         if(!authUser || get().socket?.connected) return;
 
-       const socket = io("http://localhost:8000");
+       const socket = io("http://localhost:8000", {
+        query:{
+            userId: authUser.id,
+        }
+       });
        socket.connect();
       set({socket: socket})
+       
+      socket.on("getonlineusers" ,(userId)=>{
+        set({onlineusers: userId})
+      })
+
     },
     disconnectSocket: async()=>{
 

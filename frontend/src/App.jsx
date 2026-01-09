@@ -19,7 +19,7 @@ import Usemessages from './controlauth/msgstroe'
 const App = () => {
     // const {authstore,chec,ischeckingauth,checkroute} = Useauthstore();
     const {getusers,Users} = Usemessages();
-    const {check,authUser,ischeckingauth} = Authcontrol();
+    const {check,authUser,ischeckingauth,onlineusers} = Authcontrol();
     const {getmessages,messages} = Usemessages()
 
     // useEffect(()=>{
@@ -37,6 +37,7 @@ const App = () => {
      console.log(ischeckingauth);
      console.log( "the users are",Users);
       console.log( "the users ara",Users.data)
+      console.log("the online users are ",onlineusers);
 
     console.log("the user is ",authUser);
 

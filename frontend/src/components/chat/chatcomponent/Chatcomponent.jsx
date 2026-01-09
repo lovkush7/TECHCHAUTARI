@@ -7,14 +7,16 @@ import { Formatmessagetime } from '../../../../utils/Formatetime'
 import "./Chatcomonent.css"
 
 const Chatcomponent = () => {
-   const {messages,selectedUsers,getmessages} = Usemessages();
+   const {messages,selectedUsers,getmessages, listenTomessages,nonlistenTomessages} = Usemessages();
    const {authUser} = Authcontrol();
    const MessageEndref = useRef(null);
     
     useEffect(()=>{
       if(!selectedUsers?.id) return;
       getmessages(selectedUsers.id);
-    },[selectedUsers?.id, getmessages])
+      listenTomessages();
+       return ()=> nonlistenTomessages()
+    },[selectedUsers?.id, getmessages, listenTomessages, nonlistenTomessages]);
 
   return (
     <div style={{display:"flex",flexDirection:"column",flex:"1",overflow:"auto"
@@ -24,7 +26,7 @@ const Chatcomponent = () => {
       <div className="chat-messages">
         {messages.map((msg)=>(
           <div key={msg.id}
-          className={`chat ${msg.senderId === authUser.id ? "chat-start" : "chat-end"}`}>
+          className={`chat ${msg.senderId === authUser.id ? "chat-end" : "chat-start"}`}>
 
             <div className="chat-image avatar">
               <div className="avatar-img">
@@ -34,12 +36,12 @@ const Chatcomponent = () => {
             </div>
                 <div className="chat-header">
                  
-                  <div className="chat-bubble">
+                  <div className="chat-bubblee">
                     {msg.image && (
                       <img style={{width:"7rem",height:"7rem"}} src={msg.image} alt="" />
                     )}
                     {msg.text && (
-                      <div className={`chat-bubble ${msg.senderId === authUser.id ? "chat-bubble-primary text-white" : "bg-base-300 "} max-w-xs `}>
+                      <div className={`chat-bubble ${msg.senderId === authUser.id ? "chat-bubble-neutral text-white" : "bg-base-300 "} max-w-xs `}>
                       <p style={{fontSize:"1rem"}}>{msg.text}</p>
                       </div>
                     )}

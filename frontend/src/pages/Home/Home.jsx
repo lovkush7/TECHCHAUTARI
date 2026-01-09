@@ -7,7 +7,9 @@ const Home = () => {
     <div className=''>
       <Navbar/>
       <div className="home">
-          home
+         
+         <button className="btn btn-primary">home</button>
+
       </div>
     </div>
   )

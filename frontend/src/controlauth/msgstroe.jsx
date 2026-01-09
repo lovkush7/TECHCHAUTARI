@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import api from "../api/api";
+import { Socket } from "socket.io-client";
+import Authcontrol from "./authcontrol";
 // import api from "../api/api";
 
 const Usemessages = create((set,get)=>({
@@ -51,6 +53,21 @@ const Usemessages = create((set,get)=>({
     setselectedUsers: async(selectedUsers)=>{
         set({selectedUsers})
 
+    },
+
+    listenTomessages: ()=>{
+        const {selectedUsers} = get();
+        if(!selectedUsers){
+            return;
+        }
+        const socket = Authcontrol.getState().socket;
+        socket.on("newmessage",(newmessage)=>{
+          set({messages: [...get().messages, newmessage]})
+        })
+    },
+    nonlistenTomessages: ()=>{
+        const socket = Authcontrol.getState().socket;
+        socket.off("newmessage")
     }
 
 

@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import cloudinary from "../../config/Cloudnary.config.ts";
 import { Messages } from "../../entities/messages.entities.ts";
 import type { User } from "../../entities/User.entities.ts";
+import { getReciverSocketId, io } from "../../config/socket.config.ts";
 
 class SendmessagesServices {
    async sendmessages(
@@ -32,6 +33,11 @@ class SendmessagesServices {
                 message.image = imageurl;
             }
             await message.save();
+            
+            const reciverSocketid = getReciverSocketId(reciverid as string );
+            if(reciverSocketid){
+             io.to(reciverSocketid).emit("newmessage", message);
+            }
 
             return message;
 

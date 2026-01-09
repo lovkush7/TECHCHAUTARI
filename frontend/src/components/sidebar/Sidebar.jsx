@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import { User, User2, User2Icon } from "lucide-react"
 import Usemessages from '../../controlauth/msgstroe'
 import "./Sidebar.css"
+import Authcontrol from '../../controlauth/authcontrol'
 
 const Sidebar = () => {
     const {Users, getusers, setselectedUsers,selectedUsers} = Usemessages();
+    const { onlineusers} = Authcontrol()
 
   useEffect(()=>{
     getusers();
@@ -27,9 +29,9 @@ const Sidebar = () => {
           >
             <div className="user-profile">
               <img  src={"./profile.jpg" || user.profile} alt="ac" className='user-profile' />
-              {/* {onlineusers.includes(user.id) && (
+              {onlineusers.includes(user.id) && (
                 <span className="online-indicator"></span>
-              )} */}
+              )}
             
             </div>
             <div className="user-info-details">
@@ -37,7 +39,7 @@ const Sidebar = () => {
                 {user.Fullname}
               </div>
               <div className="user-status">
-                {/* {onlineusers.includes(user.id) ? "Online" : "Offline"} */}
+                {onlineusers.includes(user.id) ? "Online" : "Offline"}
               </div>
             </div>
 
