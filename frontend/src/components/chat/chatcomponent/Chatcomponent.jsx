@@ -26,7 +26,7 @@ const Chatcomponent = () => {
       <div className="chat-messages">
         {messages.map((msg)=>(
           <div key={msg.id}
-          className={`chat ${msg.senderId === authUser.id ? "chat-end" : "chat-start"}`}>
+          className={`chat ${msg.senderId === authUser.id ? "end" : "start"}`}>
 
             <div className="chat-image avatar">
               <div className="avatar-img">
@@ -36,12 +36,12 @@ const Chatcomponent = () => {
             </div>
                 <div className="chat-header">
                  
-                  <div className="chat-bubblee">
+                  <div  className={`chat-bubble ${ msg.senderId === authUser.id ? "chat-bubble-primary text-white" : "bg-base-300 "}`} >
                     {msg.image && (
                       <img style={{width:"7rem",height:"7rem"}} src={msg.image} alt="" />
                     )}
                     {msg.text && (
-                      <div className={`chat-bubble ${msg.senderId === authUser.id ? "chat-bubble-neutral text-white" : "bg-base-300 "} max-w-xs `}>
+                      <div className="max-w-xs">
                       <p style={{fontSize:"1rem"}}>{msg.text}</p>
                       </div>
                     )}

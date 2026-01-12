@@ -9,6 +9,7 @@ import { Role } from "../enums/Role.enums.ts";
 import { UserProfile } from "./Userprofile.entities.ts";
 
 import { Messages } from "./messages.entities.ts";
+import FriendRequest from "./Friendrequest.entities.ts";
 // import { messages } from "./messages.entities.ts";
 
 
@@ -37,6 +38,12 @@ export class User extends Commonentities{
 
     @OneToMany(()=>Messages,(messages)=>messages.reciver)
     recivedMessages: Messages[];
+
+    @OneToMany(()=>FriendRequest, (friendrequest)=>friendrequest.sender)
+    sendFriendRequest: FriendRequest[];
+
+    @OneToMany(()=>FriendRequest, (fr)=>fr.Reciver)
+    reciveFriendRequest: FriendRequest[];
 
     @BeforeInsert()
     _(){
