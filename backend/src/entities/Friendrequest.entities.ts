@@ -1,4 +1,5 @@
-import { Column, Entity, ManyToOne } from "typeorm/browser";
+// import {  Entity, ManyToOne } from "typeorm/browser";
+import { Column, Entity, ManyToOne } from "typeorm";
 import Commonentities from "./Common.entities.ts";
 import { User } from "./User.entities.ts";
 

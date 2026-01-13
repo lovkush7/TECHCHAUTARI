@@ -9,6 +9,7 @@ import GetuserControllers from "../controller/getusers/Getuser.controllers.ts";
 import SendmessageControllers from "../controller/sendmessage/Sendmessage.controllers.ts";
 import GetmessagesControllers from "../controller/getmessages/Getmessages.controllers.ts";
 import CheckController from "../controller/check/Check.controller.ts";
+import SendrequestController from "../controller/Sendrequest/Sendrequest.controller.ts";
 
 
 const router = Router();
@@ -50,7 +51,12 @@ const user = await GetmessagesControllers.getmessages(req,res);
 res.json({data: user})
 });
 
-router.get("/checkroute",protectedroute,CheckController.checkuser)
+router.get("/checkroute",protectedroute,CheckController.checkuser);
+
+
+router.post("/sendfriendrequest",protectedroute, async(req,res)=>{
+const user = await SendrequestController.sendFriendRequest(req,res)
+})
    
 
 export default router;
