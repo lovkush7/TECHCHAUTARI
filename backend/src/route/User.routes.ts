@@ -11,6 +11,8 @@ import GetmessagesControllers from "../controller/getmessages/Getmessages.contro
 import CheckController from "../controller/check/Check.controller.ts";
 import SendrequestController from "../controller/Sendrequest/Sendrequest.controller.ts";
 import AcceptRequestController from "../controller/AcceptRequest/AcceptRequest.controller.ts";
+import RejectrequestController from "../controller/RejectRequest/Rejectrequest.controller.ts";
+import PendingrequestController from "../controller/PendingRequest/Pendingrequest.controller.ts";
 
 
 const router = Router();
@@ -63,9 +65,17 @@ router.post("/sendfriendrequest",protectedroute, async(req,res)=>{
 router.patch("/acceptfriendrequest/:id",protectedroute,async (req,res)=>{
 const user = await AcceptRequestController.acceptfr(req,res);
 res.json({user})
-} 
-  
+}   
 )
    
+router.patch("/rejectfriendrequest/:id",protectedroute, async(req,res)=>{
+  const user = await RejectrequestController.rejectRequest(req,res);
+  res.json({user})
+});
+
+router.get("/pendingrequests", protectedroute, async(req,res)=>{
+  const user = await PendingrequestController.getPendingRequests(req);
+  res.json({user})
+})
 
 export default router;
