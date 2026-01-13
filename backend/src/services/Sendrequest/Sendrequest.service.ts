@@ -23,7 +23,8 @@ async sendFriendRequest(senderId: string, receiverId: string) {
                 sender: {id: senderId},
                 Reciver: {id: receiverId}
 
-            }
+            },
+            relations: ["sender", "Reciver"] 
         })
         if(existingRequest){
             throw new Error("Friend request already sent");
@@ -35,6 +36,12 @@ async sendFriendRequest(senderId: string, receiverId: string) {
         fr.status = FriendRequestStatus.PENDING;
 
         await fr.save();
+
+       return {
+        success: true,
+        message: "Friend request sent successfully",
+        fr
+       }
 
     }catch(err){
         throw new Error("Failed to send friend request");

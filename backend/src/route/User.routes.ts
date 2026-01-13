@@ -10,6 +10,7 @@ import SendmessageControllers from "../controller/sendmessage/Sendmessage.contro
 import GetmessagesControllers from "../controller/getmessages/Getmessages.controllers.ts";
 import CheckController from "../controller/check/Check.controller.ts";
 import SendrequestController from "../controller/Sendrequest/Sendrequest.controller.ts";
+import AcceptRequestController from "../controller/AcceptRequest/AcceptRequest.controller.ts";
 
 
 const router = Router();
@@ -55,8 +56,16 @@ router.get("/checkroute",protectedroute,CheckController.checkuser);
 
 
 router.post("/sendfriendrequest",protectedroute, async(req,res)=>{
-const user = await SendrequestController.sendFriendRequest(req,res)
+ const user = await SendrequestController.sendFriendRequest(req,res)
+  res.json({user});
 })
+
+router.patch("/acceptfriendrequest/:id",protectedroute,async (req,res)=>{
+const user = await AcceptRequestController.acceptfr(req,res);
+res.json({user})
+} 
+  
+)
    
 
 export default router;
