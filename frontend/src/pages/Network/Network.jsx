@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
+import FriendRequest from '../../components/FriendRequest/FriendRequest'
+import "./Network.css"
 
 const Network = () => {
   return (
-    <div>
+    <div className='Network'>
         <Navbar/>
-      network
+        <FriendRequest/>
     </div>
   )
 }
