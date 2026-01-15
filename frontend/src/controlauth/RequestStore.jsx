@@ -12,7 +12,7 @@ const RequestStore = create((set)=>({
     sendRequest: async(requestdata)=>{
         try{
             set({isSendingRequest: true});
-            const request = await api.post("/auth/sendrequest", requestdata);
+            const request = await api.post("/auth/sendfriendrequest", requestdata);
             set((state)=>({
                 requests: [...state.requests, request.data]
             }));
