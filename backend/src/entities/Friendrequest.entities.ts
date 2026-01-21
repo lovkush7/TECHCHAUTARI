@@ -1,5 +1,5 @@
 // import {  Entity, ManyToOne } from "typeorm/browser";
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import Commonentities from "./Common.entities.ts";
 import { User } from "./User.entities.ts";
 
@@ -13,10 +13,12 @@ export enum FriendRequestStatus {
 class FriendRequest extends Commonentities {
 
 @ManyToOne(()=>User, (user)=>user.sendFriendRequest,{onDelete:"CASCADE"})
+@JoinColumn({name:"senderId"})
 sender: User;
 
 @ManyToOne(()=>User, (user)=>user.reciveFriendRequest)
-Reciver: User;
+@JoinColumn({name:"reciverId"})
+reciver: User;
 
 @Column({type: "enum", enum: FriendRequestStatus, default: FriendRequestStatus.PENDING})
 status: FriendRequestStatus;

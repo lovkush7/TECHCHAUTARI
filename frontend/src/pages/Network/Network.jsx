@@ -5,9 +5,12 @@ import "./Network.css"
 
 const Network = () => {
   return (
+    <div>
+      <Navbar/>
     <div className='Network'>
-        <Navbar/>
+        
         <FriendRequest/>
+    </div>
     </div>
   )
 }

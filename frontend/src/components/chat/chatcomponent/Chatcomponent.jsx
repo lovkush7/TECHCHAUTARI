@@ -7,26 +7,27 @@ import { Formatmessagetime } from '../../../../utils/Formatetime'
 import "./Chatcomonent.css"
 
 const Chatcomponent = () => {
-   const {messages,selectedUsers,getmessages, listenTomessages,nonlistenTomessages} = Usemessages();
-   const {authUser} = Authcontrol();
-   const MessageEndref = useRef(null);
-    
-    useEffect(()=>{
-      if(!selectedUsers?.id) return;
-      getmessages(selectedUsers.id);
-      listenTomessages();
-       return ()=> nonlistenTomessages()
-    },[selectedUsers?.id, getmessages, listenTomessages, nonlistenTomessages]);
+  const { messages, selectedUsers, getmessages, listenTomessages, nonlistenTomessages } = Usemessages();
+  const { authUser } = Authcontrol();
+  const MessageEndref = useRef(null);
+
+  useEffect(() => {
+    if (!selectedUsers?.id) return;
+    getmessages(selectedUsers.id);
+    listenTomessages();
+    return () => nonlistenTomessages()
+  }, [selectedUsers?.id, getmessages, listenTomessages, nonlistenTomessages]);
 
   return (
-    <div style={{display:"flex",flexDirection:"column",flex:"1",overflow:"auto"
+    <div style={{
+      display: "flex", flexDirection: "column", flex: "1", overflow: "auto"
 
     }}>
-      <ChatHeader/>
-      <div className="chat-messages">
+      <ChatHeader />
+       <div className="chat-messages">
         {messages.map((msg)=>(
           <div key={msg.id}
-          className={`chat ${msg.senderId === authUser.id ? "end" : "start"}`}>
+          className={`chat ${msg.senderId === authUser.id ? "chat-end" : "chat-start"}`}>
 
             <div className="chat-image avatar">
               <div className="avatar-img">
@@ -53,11 +54,9 @@ const Chatcomponent = () => {
           </div>
         ))}
       </div>
-        
-      
-      <Chatinput/>
-        
-      
+      <Chatinput />
+
+
     </div>
   )
 }

@@ -75,7 +75,9 @@ router.patch("/rejectfriendrequest/:id",protectedroute, async(req,res)=>{
 
 router.get("/pendingrequests", protectedroute, async(req,res)=>{
   const user = await PendingrequestController.getPendingRequests(req);
-  res.json({user})
+  res.json({
+    success:true,
+    data:user})
 })
 
 export default router;

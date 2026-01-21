@@ -2,6 +2,7 @@ import React from 'react'
 import Usemessages from '../../../controlauth/msgstroe'
 import Authcontrol from '../../../controlauth/authcontrol';
 import "./Chatheader.css"
+// import styles from './Chatheader.module.css'
 import { Cross, CrosshairIcon, CrossIcon } from 'lucide-react';
 import { IoClose } from 'react-icons/io5';
 
@@ -17,7 +18,7 @@ const ChatHeader = () => {
                 </div>
           
             <div style={{marginBottom:'0'}}>
-            <h3 className="user-name"  >
+            <h3 style={{fontSize:'1rem'}} className="user-name"  >
                 {selectedUsers?.Fullname}
                
             </h3>

@@ -8,7 +8,13 @@ const Home = () => {
       <Navbar/>
       <div className="home">
          
-         <button className="btn btn-primary">home</button>
+        <button className="btn btn-primary">
+  DaisyUI Test
+</button>
+      <div className="chat-bubble">
+        
+      </div>
+
 
       </div>
     </div>

@@ -21,10 +21,10 @@ async sendFriendRequest(senderId: string, receiverId: string) {
         const existingRequest = await FriendRequest.findOne({
             where:{
                 sender: {id: senderId},
-                Reciver: {id: receiverId}
+                reciver: {id: receiverId}
 
             },
-            relations: ["sender", "Reciver"] 
+            relations: ["sender", "reciver"] 
         })
         if(existingRequest){
             throw new Error("Friend request already sent");
@@ -32,7 +32,7 @@ async sendFriendRequest(senderId: string, receiverId: string) {
 
         const fr = new FriendRequest()
         fr.sender = {id: senderId} as unknown as User;
-        fr.Reciver = {id: receiverId} as unknown as User;
+        fr.reciver = {id: receiverId} as unknown as User;
         fr.status = FriendRequestStatus.PENDING;
 
         await fr.save();

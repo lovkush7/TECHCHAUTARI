@@ -17,7 +17,7 @@
                 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 
     width: 100%;
-    max-width: 72rem;         
+    max-width: 92rem;         
     height: calc(100vh - 7rem);   
 }
 .chat-container{

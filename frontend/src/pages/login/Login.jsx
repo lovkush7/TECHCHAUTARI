@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import "./Login.css";
+import "./Login.module.css";
 // import Useauthstore from '../../authstore/authstore';
 import Authcontrol from '../../controlauth/authcontrol';
 
@@ -70,7 +70,7 @@ const Login = () => {
                  />
             </div>
             <button className='btn' type='submit'>login</button>
-          <center>  <p className='bottom-type' style={{}}>Don't have an account? <Link to="/signup">signup</Link></p></center>
+          <center>  <p className='bottom-type' style={{color:"black"}}>Don't have an account?<Link to="/signup"> signup</Link></p></center>
 
         </form>
       

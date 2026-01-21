@@ -42,7 +42,7 @@ export class User extends Commonentities{
     @OneToMany(()=>FriendRequest, (friendrequest)=>friendrequest.sender)
     sendFriendRequest: FriendRequest[];
 
-    @OneToMany(()=>FriendRequest, (fr)=>fr.Reciver)
+    @OneToMany(()=>FriendRequest, (fr)=>fr.reciver)
     reciveFriendRequest: FriendRequest[];
 
     @BeforeInsert()

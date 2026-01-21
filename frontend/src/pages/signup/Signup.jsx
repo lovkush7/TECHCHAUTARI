@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import "./Signup.css";
+import "./Signup.module.css";
 // import Useauthstore from '../../authstore/authstore';
 import Authcontrol from '../../controlauth/authcontrol';
 
@@ -81,8 +81,8 @@ const Signup = () => {
                  required
                  />
             </div>
-            <button className='btn'>sign up</button>
-          <center>  <p className='bottom-type' style={{}}>Already have an account? <Link to="/login">login</Link></p></center>
+            <button className='btn'>sign up</button> 
+          <center>   <p className='bottom-type' style={{ color:"black"}}>Already have an account?<Link to="/login">login</Link></p></center>
 
         </form>
       
