@@ -5,6 +5,10 @@ const RequestStore = create((set)=>({
     requests: [],
     isSendingRequest: false,
     isgettingRequests: false,
+    PendingRequests: [],
+    GetsendRequests: [],
+
+
 
 
 
@@ -30,12 +34,22 @@ const RequestStore = create((set)=>({
         try{
             set({isgettingRequests: true})
         const res = await api.get("/auth/pendingrequests");
-        set({requests: res.data})
+        set({PendingRequests: res.data.data})
         }catch(err){
             console.log("the error is "+err)
         }
 
-    }
+    },
+    getSendRequests: async ()=>
+        {
+            try{
+                const res = await api.get("/auth/getsendrequests");
+                set({GetsendRequests: res.data.data})
+
+            }catch(err){
+                console.log("the error is "+err)
+            }
+        },
 
 }))
 export default RequestStore;

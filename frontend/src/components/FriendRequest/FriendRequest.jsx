@@ -8,7 +8,7 @@ const FriendRequest = () => {
   const [Followingid,setFollowingid] = useState([]);
   const [visibleUsers, setVisibleUsers]= useState([])
 
-  const { getRequests,sendRequest,requests,isSendingRequest,isgettingRequests} = RequestStore();
+  const { getRequests,sendRequest,requests,isSendingRequest,isgettingRequests,getSendRequests,GetsendRequests} = RequestStore();
   const {authUser} = Authcontrol()
   const {  Users, getusers, setselectedUsers} = Usemessages();
 
@@ -17,12 +17,12 @@ const FriendRequest = () => {
 
 
   useEffect(()=>{
-  
+  getSendRequests()
     getRequests();
     getusers();
 
   },[]);
-  console.log("the req ",requests.user)
+  console.log("the req ",GetsendRequests)
   
   // useEffect(()=>{
   //   if(requests?.length){
@@ -34,17 +34,21 @@ const FriendRequest = () => {
    
    useEffect(()=>{
           if(Users.data && requests){
-          //  const sendId = requests?.map((r)=>r.receiverId)
-          //  setFollowingid(sendId),
+          
+                    
+           const sendId = GetsendRequests?.map((r)=>r.receiverId);
+           setFollowingid(sendId),
+            
        setVisibleUsers(Users.data.
         filter((u)=>u.id !== authUser?.id)
         .filter((u)=>!Followingid.includes(u.id))
         
       
       )
+    
     }
    }
-   ,[Users.data, authUser?.id,Followingid,requests])
+   ,[Users.data, authUser?.id,GetsendRequests])
 
 
 

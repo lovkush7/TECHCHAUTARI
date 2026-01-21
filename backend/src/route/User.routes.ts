@@ -13,6 +13,7 @@ import SendrequestController from "../controller/Sendrequest/Sendrequest.control
 import AcceptRequestController from "../controller/AcceptRequest/AcceptRequest.controller.ts";
 import RejectrequestController from "../controller/RejectRequest/Rejectrequest.controller.ts";
 import PendingrequestController from "../controller/PendingRequest/Pendingrequest.controller.ts";
+import GetSendRequstController from "../controller/GetsendRequest/GetSendRequst.controller.ts";
 
 
 const router = Router();
@@ -78,6 +79,14 @@ router.get("/pendingrequests", protectedroute, async(req,res)=>{
   res.json({
     success:true,
     data:user})
+});
+
+router.get("/getsendrequests",protectedroute,async(req,res)=>{
+  const user = await GetSendRequstController.getsendrequest(req);
+  res.json({
+    success: true,
+    data: user
+  })
 })
 
 export default router;
