@@ -14,6 +14,7 @@ import AcceptRequestController from "../controller/AcceptRequest/AcceptRequest.c
 import RejectrequestController from "../controller/RejectRequest/Rejectrequest.controller.ts";
 import PendingrequestController from "../controller/PendingRequest/Pendingrequest.controller.ts";
 import GetSendRequstController from "../controller/GetsendRequest/GetSendRequst.controller.ts";
+import PostController from "../controller/Post/Post.controller.ts";
 
 
 const router = Router();
@@ -89,4 +90,12 @@ router.get("/getsendrequests",protectedroute,async(req,res)=>{
   })
 })
 
+router.post("/posts",protectedroute,async(req,res)=>{
+  const user = await PostController.createPost(req,res);
+  res.json({
+    success: true,
+    data: user
+  })
+ 
+})
 export default router;

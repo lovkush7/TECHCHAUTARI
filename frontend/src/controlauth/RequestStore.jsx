@@ -13,22 +13,23 @@ const RequestStore = create((set)=>({
 
 
 
-    sendRequest: async(requestdata)=>{
-        try{
-            set({isSendingRequest: true});
-            const request = await api.post("/auth/sendfriendrequest", requestdata);
-            set((state)=>({
-                requests: [...state.requests, request.data]
-            }));
+ sendRequest: async (requestdata) => {
+  try {
+    set({ isSendingRequest: true });
 
-        }catch(err){
-            console.log("Error sending request:", err);
-        }
-        finally{
-            set({isSendingRequest: false});
-        }
+    const res = await api.post("/auth/sendfriendrequest", requestdata);
 
-    },
+    set(state => ({
+      GetsendRequests: [...state.GetsendRequests, res.data]
+    }));
+
+  } catch (err) {
+    console.log("Error sending request:", err);
+  } finally {
+    set({ isSendingRequest: false });
+  }
+},
+
 
     getRequests: async ()=>{
         try{
@@ -40,16 +41,14 @@ const RequestStore = create((set)=>({
         }
 
     },
-    getSendRequests: async ()=>
-        {
-            try{
-                const res = await api.get("/auth/getsendrequests");
-                set({GetsendRequests: res.data.data})
-
-            }catch(err){
-                console.log("the error is "+err)
-            }
-        },
+   getSendRequests: async () => {
+  try {
+    const res = await api.get("/auth/getsendrequests");
+    set({ GetsendRequests: [...res.data.data] }); //  IMPORTANT
+  } catch (err) {
+    console.log("the error is " + err);
+  }
+},
 
 }))
 export default RequestStore;

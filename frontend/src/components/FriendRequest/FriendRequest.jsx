@@ -32,27 +32,24 @@ const FriendRequest = () => {
   // },[requests])
 
    
-   useEffect(()=>{
-          if(Users.data && requests){
-          
-                    
-           const sendId = GetsendRequests?.map((r)=>r.receiverId);
-           setFollowingid(sendId),
-            
-       setVisibleUsers(Users.data.
-        filter((u)=>u.id !== authUser?.id)
-        .filter((u)=>!Followingid.includes(u.id))
-        
-      
-      )
-    
-    }
-   }
-   ,[Users.data, authUser?.id,GetsendRequests])
+ useEffect(() => {
+  if (Users?.data && GetsendRequests && authUser?.id) {
+
+    const sendIds = GetsendRequests.map(r => r.receiverId);
+    setFollowingid(sendIds);
+
+    const filteredUsers = Users.data
+      .filter(u => u.id !== authUser.id)
+      .filter(u => !sendIds.includes(u.id));
+
+    setVisibleUsers(filteredUsers);
+  }
+}, [Users?.data, GetsendRequests, authUser?.id]);
 
 
 
-  console.log("the requests are ",requests);
+
+  console.log("the visible  are ",visibleUsers);
       const handlesubmit = async(userId)=>{
     await sendRequest({
       // senderId: authUser.id, 
@@ -98,4 +95,3 @@ const FriendRequest = () => {
 }
 
 export default FriendRequest
-
