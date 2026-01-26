@@ -3,68 +3,76 @@ import RequestStore from '../../controlauth/RequestStore'
 import Authcontrol from '../../controlauth/authcontrol';
 import Usemessages from '../../controlauth/msgstroe';
 import "./FriendRequest.css"
+import Requestfr from '../friendreq/Requestfr';
 
 const FriendRequest = () => {
-  const [Followingid,setFollowingid] = useState([]);
-  const [visibleUsers, setVisibleUsers]= useState([])
+ 
 
-  const { getRequests,sendRequest,requests,isSendingRequest,isgettingRequests,getSendRequests,GetsendRequests} = RequestStore();
+  const {sendRequest, getRequests,getSendRequests,GetsendRequests,PendingRequests,isSendingRequest} = RequestStore();
   const {authUser} = Authcontrol()
-  const {  Users, getusers, setselectedUsers} = Usemessages();
+  const {  Users, getusers} = Usemessages();
+  const [visibleUser, setvisibleUser] = useState([]);
 
-     
-
-
-
+    
   useEffect(()=>{
   getSendRequests()
     getRequests();
     getusers();
 
   },[]);
-  console.log("the req ",GetsendRequests)
+
+    console.log("users",Users)      
+    console.log("getreq",GetsendRequests)
+    console.log("pending",PendingRequests)
+
+
+    const ispending =(userId)=>{
+      return GetsendRequests?.some((req)=>
+      req.reciver?.id === userId &&
+      req.status === "PENDING"
+      )
+    }
+
+    const isAccpeted =(userId)=>{
+      return GetsendRequests?.some((req)=>
+      req.reciver?.id === userId &&
+      req.status === "ACCEPTED"
+      )
+    
+    }
+    useEffect(()=>{
+      if(Users?.data  && authUser?.id){
+        setvisibleUser(Users.data.filter((user)=>
+         user.id !== authUser.id ))
+
+      }
+    },[Users,authUser])
+
   
-  // useEffect(()=>{
-  //   if(requests?.length){
-  //     const sendId = requests.map((r)=>r.receiverId)
-  //     setFollowingid(sendId);
-  //   }
-  // },[requests])
-
-   
- useEffect(() => {
-  if (Users?.data && GetsendRequests && authUser?.id) {
-
-    const sendIds = GetsendRequests.map(r => r.receiverId);
-    setFollowingid(sendIds);
-
-    const filteredUsers = Users.data
-      .filter(u => u.id !== authUser.id)
-      .filter(u => !sendIds.includes(u.id));
-
-    setVisibleUsers(filteredUsers);
-  }
-}, [Users?.data, GetsendRequests, authUser?.id]);
-
-
-
-
-  console.log("the visible  are ",visibleUsers);
       const handlesubmit = async(userId)=>{
     await sendRequest({
       // senderId: authUser.id, 
       receiverId: userId,
       });
-     setFollowingid((prev)=>[...prev,userId]);
-     setVisibleUsers(prev =>
-      prev.filter(user => user.id !== userId)
-    );
+      RequestStore.setState((state)=>({
+        GetsendRequests:[
+          ...state.GetsendRequests,
+          {
+            reciver:{id:userId},
+            status:"PENDING"
+          }
+        ]
+      }))
+      
+
   }
   return (
     <div className='user-form'>
-      {visibleUsers.map((user,idx)=>(
+      <Requestfr/>
+      <div style={{"background":"linear-gradient(135deg, #eef2f3 0%, #d9e4ec 100%)"}} className=" flex flex-wrap justify-center border-amber-100 rounded-2xl p-17 overflow-y-auto">
+      {visibleUser.map((user,idx)=>(
         <div key={idx} >
-         <div className="user-info  p-2 m-1.5 ">
+         <div className="user-info bg-white  p-2 m-1.5 overflow-y-auto ">
           <div className='flex justify-end cursor-pointer'>X</div>
           <div  className="user-photo  p-1.5">
             <div className="photo-content ">
@@ -76,20 +84,31 @@ const FriendRequest = () => {
           <div className="user-name">
             <p>{user.Fullname}</p>
           </div>
-          <button 
+          {isAccpeted(user.id) ? (
+            <button className='bg-green-600 text-white px-4 py-2 rounded-2xl' disabled>
+              friend
+            </button>
+          ) : ispending(user.id) ? (
+            <button className='bg-gray-400 text-white px-4 py-2 rounded-2xl' disabled>
+              pending
+            </button>
+          ) : (
+             <button 
           type="button"   
           id={user.id}
            onClick={()=> handlesubmit(user.id)}
-            disabled={isSendingRequest || Followingid.includes(user.id)}
-           className="bg-black text-white px-4 py-2 mt-0.5 rounded hover:bg-gray-600">
-            {Followingid.includes(user.id) ? " following" : " Follow"} 
-            </button>
+            disabled={isSendingRequest }
+           className="bg-black text-white px-4 py-2 mt-0.5 rounded-2xl hover:bg-gray-600">
+            {isSendingRequest ? " sending" : " Follow"} 
+            </button>) }
+
+         
          </div>
         
         </div>
         
       ))}
-      
+      </div>
     </div>
   )
 }

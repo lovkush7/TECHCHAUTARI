@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import "./Signup.module.css";
+import "./Signup.css";
 // import Useauthstore from '../../authstore/authstore';
 import Authcontrol from '../../controlauth/authcontrol';
 
