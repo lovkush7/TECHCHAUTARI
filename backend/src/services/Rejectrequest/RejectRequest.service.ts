@@ -16,7 +16,7 @@ class RejectRequestService {
             if(!request){
                 throw new Error("Friend request not found");
             }
-            if(request.Reciver.id !== userId){
+            if(request.reciver.id !== userId){
                 throw new Error("You are not authorized to reject this request");
 
             }

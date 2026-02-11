@@ -51,5 +51,29 @@ const RequestStore = create((set)=>({
   }
 },
 
+acceptreq: async(requestId)=>{
+  try{
+    const res = await api.patch(`/auth/acceptfriendrequest/${requestId}`)
+     set(
+      state => ({
+        PendingRequests: state.PendingRequests.filter(req => req.id !== requestId)
+      })
+     )
+
+  }catch(err){
+    console.log("the error is "+err)
+  }
+},
+rejectreq: async(requestId)=>{
+  try{
+   const res = await api.patch(`/auth/rejectfriendrequest/${requestId}`)
+     set( state => ({
+      PendingRequests: state.PendingRequests.filter(req => req.id !== requestId  )
+     }))
+  }catch(err  ){
+    console.log("the error is "+err)
+  }
+}
+
 }))
 export default RequestStore;

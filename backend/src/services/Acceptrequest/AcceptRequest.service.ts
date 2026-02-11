@@ -11,13 +11,13 @@ class AcceptRequestService {
                 where:{
                     id: requestId,
                 },
-                relations: ["Reciver"]
+                relations: ["reciver"]
             });
             if(!request){
                 throw new Error("Friend request not found");
             }
 
-            if(request.Reciver.id !== userId){
+            if(request.reciver.id !== userId){
                 throw new Error("You are not authorized to accept this request");
             }
             request.status= FriendRequestStatus.ACCEPTED;

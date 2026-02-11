@@ -15,6 +15,7 @@ import RejectrequestController from "../controller/RejectRequest/Rejectrequest.c
 import PendingrequestController from "../controller/PendingRequest/Pendingrequest.controller.ts";
 import GetSendRequstController from "../controller/GetsendRequest/GetSendRequst.controller.ts";
 import PostController from "../controller/Post/Post.controller.ts";
+import LogoutController from "../controller/logout/Logout.controller.ts";
 
 
 const router = Router();
@@ -26,6 +27,8 @@ res.json({data: user})
 });
 
 router.post("/login",loginController.login);
+
+router.post("/logout",protectedroute,LogoutController.logout)
 
 // router.get("/check",protectedroute,CheckController.checkuser);
 
@@ -64,13 +67,13 @@ router.post("/sendfriendrequest",protectedroute, async(req,res)=>{
   res.json({user});
 })
 
-router.patch("/acceptfriendrequest/:id",protectedroute,async (req,res)=>{
+router.patch("/acceptfriendrequest/:requestId",protectedroute,async (req,res)=>{
 const user = await AcceptRequestController.acceptfr(req,res);
 res.json({user})
 }   
 )
    
-router.patch("/rejectfriendrequest/:id",protectedroute, async(req,res)=>{
+router.patch("/rejectfriendrequest/:requestId",protectedroute, async(req,res)=>{
   const user = await RejectrequestController.rejectRequest(req,res);
   res.json({user})
 });

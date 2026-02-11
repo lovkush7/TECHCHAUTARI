@@ -41,6 +41,16 @@ const Authcontrol = create((set,get)=>({
             set({isloggingin: false});
         }
     },
+    logout:async()=>{
+        try{
+          const res= await api.post("/auth/logout")
+          set({authUser: null})
+          get().disconnectSocket()
+          console.log(res);
+        }catch(err){
+            throw err;
+        }
+    },
 
     signup: async (data)=>{
         try{

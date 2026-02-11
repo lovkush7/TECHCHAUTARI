@@ -20,7 +20,8 @@ class AcceptRequestCotroller{
             throw new Error("Invalid request ID");
            }
 
-        return await AcceptRequestService.acceptfr(userId,requestId)
+        const result = await AcceptRequestService.acceptfr(userId,requestId)
+        return result;
         }catch(err){
             console.log("the error is "+err);
         }
