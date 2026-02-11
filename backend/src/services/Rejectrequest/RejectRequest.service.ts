@@ -10,7 +10,7 @@ class RejectRequestService {
                 where:{
                     id: reciverId,
                 },
-                relations: ["Reciver"]
+                relations: ["reciver"]
             });
 
             if(!request){
@@ -23,7 +23,10 @@ class RejectRequestService {
             request.status = FriendRequestStatus.REJECTED;
             await request.save();
 
-            return {success: true, message: "Friend request rejected successfully", request: request.status};
+            return {
+                success: true,
+                 message: "Friend request rejected successfully", 
+                 request: request.status};
 
         }catch(err){
             console.log(err)

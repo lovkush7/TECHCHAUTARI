@@ -18,7 +18,8 @@ class RejectRequestController {
             throw new Error("Reciver not found");
         }
         
-         await RejectRequestService.rejectRequest( userId, reciverId);
+        const result = await RejectRequestService.rejectRequest( userId, reciverId);
+        return result;
 
      }catch(err){
         console.log(err);

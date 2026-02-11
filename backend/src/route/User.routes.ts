@@ -73,7 +73,7 @@ res.json({user})
 }   
 )
    
-router.patch("/rejectfriendrequest/:requestId",protectedroute, async(req,res)=>{
+router.patch("/rejectfriendrequest/:reciverId",protectedroute, async(req,res)=>{
   const user = await RejectrequestController.rejectRequest(req,res);
   res.json({user})
 });

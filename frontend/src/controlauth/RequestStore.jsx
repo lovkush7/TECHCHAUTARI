@@ -64,11 +64,11 @@ acceptreq: async(requestId)=>{
     console.log("the error is "+err)
   }
 },
-rejectreq: async(requestId)=>{
+rejectreq: async(reciverId)=>{
   try{
-   const res = await api.patch(`/auth/rejectfriendrequest/${requestId}`)
+   const res = await api.patch(`/auth/rejectfriendrequest/${reciverId}`)
      set( state => ({
-      PendingRequests: state.PendingRequests.filter(req => req.id !== requestId  )
+      PendingRequests: state.PendingRequests.filter(req => req.id !== reciverId  )
      }))
   }catch(err  ){
     console.log("the error is "+err)
