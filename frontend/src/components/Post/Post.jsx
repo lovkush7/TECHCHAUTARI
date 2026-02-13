@@ -43,10 +43,23 @@ const Post = () => {
        setShowCreatePost(false);
 
     }
+    const Tooglelike = (postId)=>{
+      setpost(post.map(p => p.id === postId ? {...p, liked: !p.liked, like: p.liked ? p.like - 1 : p.like + 1} : p))
+    }
     
   return (
-    <div>
-    
+    <div className='min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50'>
+     <header className='bg-white shadow-sm sticky top-0 z-10 border-b border-gray-200'>
+         <div className='max-w-2xl mx-auto px-4 py-4'>
+              <div className='flex items-center justify-between'>
+                 <h1 className='text-2xl font-bold text-blue-500'>TECHCHAUTARI</h1>
+                 <button onClick={()=>setShowCreatePost(!showCreatePost)} 
+                    className='px-4 py-2 bg-black text-white rounded-full font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105'>
+                    {showCreatePost ? "discard post" : "create post"}
+                 </button>
+              </div>
+         </div>
+     </header>
       
     </div>
   )
