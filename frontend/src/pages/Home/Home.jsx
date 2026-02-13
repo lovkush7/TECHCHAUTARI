@@ -2,6 +2,7 @@ import React from 'react'
 import "./Home.css"
 import Navbar from '../../components/Navbar/Navbar'
 import Authcontrol from '../../controlauth/authcontrol'
+import Post from '../../components/Post/Post'
 
 const Home = () => {
 
@@ -9,14 +10,9 @@ const Home = () => {
   return (
     <div className=''>
       <Navbar/>
-      <div className="home">
-         
-        <button className="btn btn-primary">
-  DaisyUI Test
-</button>
-      <div className="chat-bubble">
-        
-      </div>
+     <Post/>
+      
+   
       <div className="logoout">
         <button className='border rounded-2xl p-6 bg-green-500 text-white '  onClick={logout}>
           logout
@@ -25,7 +21,7 @@ const Home = () => {
 
 
       </div>
-    </div>
+    
   )
 }
 

@@ -101,4 +101,5 @@ router.post("/posts",protectedroute,async(req,res)=>{
   })
  
 })
+ 
 export default router;
