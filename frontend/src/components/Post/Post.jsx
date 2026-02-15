@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Authcontrol from '../../controlauth/authcontrol';
+import { ImageIcon, X } from 'lucide-react';
 
 const Post = () => {
     const [post , setpost] = useState([]);
@@ -60,6 +61,43 @@ const Post = () => {
               </div>
          </div>
      </header>
+     <div className='max-w-2xl mx-auto px-4 py-6'>
+        {showCreatePost && (
+            <div className='bg-white rounded-2xl shadow-lg p-6 border border-gray-100 animate-in'>
+           <h2 className='text-xl font-bold mb-4 text-gray-800'>create a post</h2>
+
+           <textarea
+            value={newPost.content} 
+            onChange={(e)=>setnewPost({...newPost, content:e.target.value})} 
+            placeholder="what's on your mind ? " 
+             className='w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none'
+             name="" id="" rows="4">
+                {imagePreview && (
+                    <div className='relative mt-4 '>
+                          <img src={imagePreview}  alt="abc" className='w-full h-64 object-cover rounded-xl'/>
+                          <button onClick={()=>{imagePreview(null);
+                            setnewPost({...newPost, image: null})
+                           } } className='absolute top-2 right-2 bg-black bg-opacity-50  text-white p-2 rounded-full hover:bg-opacity-70 transition'>
+                            <X size={20}/>
+
+                          </button>
+                    </div>
+                    
+                ) }
+                  <div className='flex gap-3 mt-4'>
+            <label className='flex-1 cursor-pointer' htmlFor="">
+                <div className='flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-b-gray-300 rounded-xl  hover:border-blue-500 transistion'>
+                <ImageIcon size={20} className='text-gray-600'  />
+                </div>
+            </label>
+
+        </div>
+             </textarea>
+            </div>
+        )}
+      
+
+     </div>
       
     </div>
   )
