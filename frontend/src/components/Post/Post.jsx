@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Authcontrol from '../../controlauth/authcontrol';
 import { ImageIcon, X } from 'lucide-react';
 
@@ -11,18 +11,22 @@ const Post = () => {
     const [imagePreview, setImagePreview] =  useState(null);
     const [showCreatePost, setShowCreatePost] = useState(false);
     const [commentInputs, setCommentInputs] = useState({});
+    const fileinputref = useRef()
 
     const {authUser} =Authcontrol() 
     const handleImagechange = (e)=>{
         const file = e.target.files[0];
-        if(file){
+        if(!file.type.startsWith("image/")){
+            return;
+        }
+        
             const reader = new FileReader();
             reader.onloadend = ()=>{
                 setImagePreview(reader.result);
                 setnewPost({...newPost , image:reader.result})
             }
             reader.readAsDataURL(file);
-        }
+        
         
     }
 
@@ -71,11 +75,11 @@ const Post = () => {
             onChange={(e)=>setnewPost({...newPost, content:e.target.value})} 
             placeholder="what's on your mind ? " 
              className='w-full p-4 border border-gray-300 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none'
-             name="" id="" rows="4">
+             name="" id="" rows="4" />
                 {imagePreview && (
                     <div className='relative mt-4 '>
                           <img src={imagePreview}  alt="abc" className='w-full h-64 object-cover rounded-xl'/>
-                          <button onClick={()=>{imagePreview(null);
+                          <button onClick={()=>{setImagePreview(null);
                             setnewPost({...newPost, image: null})
                            } } className='absolute top-2 right-2 bg-black bg-opacity-50  text-white p-2 rounded-full hover:bg-opacity-70 transition'>
                             <X size={20}/>
@@ -86,13 +90,24 @@ const Post = () => {
                 ) }
                   <div className='flex gap-3 mt-4'>
             <label className='flex-1 cursor-pointer' htmlFor="">
-                <div className='flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-b-gray-300 rounded-xl  hover:border-blue-500 transistion'>
+                <div onClick={()=>{fileinputref.current?.click()}} className='flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-b-gray-300 rounded-xl  hover:border-blue-500 transistion'>
                 <ImageIcon size={20} className='text-gray-600'  />
+                <span className='text-gray-600 font-medium'>add photo</span>
                 </div>
+                <input type="file" 
+                accept="image/*" 
+                onChange={handleImagechange} 
+                className='hidden'
+                ref={fileinputref} />
             </label>
+            <button onClick={createpost} 
+             disabled={!newPost.content.trim() && !newPost.image} 
+             className='px-8 py-3 bg-black text-white rounded-xl font-medium hover:shadow-xl transistion-all disabled:opacity-50 disabled:cursor-not-allowed'>
+                addpost
+            </button>
 
         </div>
-             </textarea>
+         
             </div>
         )}
       
