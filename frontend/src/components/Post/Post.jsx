@@ -1,11 +1,24 @@
 import React, { useRef, useState } from 'react'
 import Authcontrol from '../../controlauth/authcontrol';
-import { Heart, ImageIcon, X } from 'lucide-react';
+import { Heart, ImageIcon, MessageCircle, X } from 'lucide-react';
 
 const Post = () => {
     const [post, setpost] = useState([{
         id: 1,
         username: "Sarah Johnson",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+        content: "Just launched my new project! 🚀 Excited to share it with everyone.",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+        likes: 42,
+        liked: false,
+        comments: [
+            { id: 1, username: "Mike Chen", text: "Congratulations! This looks amazing!" },
+            { id: 2, username: "Emma Davis", text: "Can't wait to try it out! 🎉" }
+        ],
+        timestamp: "2 hours ago"
+    },{
+        id: 2,
+        username: "Johnson",
         avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
         content: "Just launched my new project! 🚀 Excited to share it with everyone.",
         image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
@@ -144,23 +157,42 @@ const Post = () => {
                             {post.image && (
                                 <img src={post.image} alt="pp" className='w-full max-h-96 object-cover' />
                             )}
-                        </div>
-                    ))}
-
-                {/* likes */}
-                  
-                  <div className='px-4 py-3 flex items-center gap-6 border-t border-gray-100 '>
+                            <div className='px-4 py-3 flex items-center gap-6 border-t border-gray-100 '>
                      <button onClick={()=>Tooglelike(post.id)} 
                         className="flex items-center gap-2 group">
                         
                         <Heart 
                         size={24} 
                         className={ `transition-all duration-300 
-                        ${post.like ? 'fill-red-500 text-red-500 ' : 
+                        ${post.liked ? 'fill-red-500 text-red-500 ' : 
                         'text-gray-600 group-hover:text-red-500   group-hover: scale-110'} `}/> 
                         <span className={`font-medium ${post.liked ? 'text-red-500' :'textgray-500'}` }>{post.likes}</span>
                         </button>
+                        <div className='flex items-center gap-2 text-gray-600 '>
+                            <MessageCircle size={24}/>
+                            <span className='font-medium'>{post?.comments?.length}</span>
+                        </div>
                   </div>
+                  <div className='border-t border-gray-100 bg-gray-50'>
+                    {post.comments.length > 0 && (
+                        <div className='px-y py-3 space-y-3'>
+                            {post.comments.map((comment)=>(
+                                <div key={comment.id}>
+                                        <img src={profile} alt="" />
+                                </div>
+                            ) )}
+
+                        </div>
+                    )}
+
+                  </div>
+                        </div>
+                        
+                    ))}
+
+                {/* likes */}
+                  
+                  
                 </div>
 
 
