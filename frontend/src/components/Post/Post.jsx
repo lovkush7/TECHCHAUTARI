@@ -158,6 +158,7 @@ const Post = () => {
                         className={ `transition-all duration-300 
                         ${post.like ? 'fill-red-500 text-red-500 ' : 
                         'text-gray-600 group-hover:text-red-500   group-hover: scale-110'} `}/> 
+                        <span className={`font-medium ${post.liked ? 'text-red-500' :'textgray-500'}` }>{post.likes}</span>
                         </button>
                   </div>
                 </div>
