@@ -78,6 +78,25 @@ const Post = () => {
         setpost(post.map(p => p.id === postId ? { ...p, liked: !p.liked, like: p.liked ? p.like - 1 : p.like + 1 } : p))
     }
 
+    const addcomment = (postId)=>{
+        const commentText = commentInputs[postId];
+        if(!commentText?.trim()) return;
+
+        setpost(post.map(p=> {
+            if(p.id === postId){
+                const newcomment ={
+                    id: Date.now(),
+                    username: authUser.Fullname,
+                    text: commentText
+                }
+                return {
+                    ...p,
+                    comments: [...p.comments, newcomment]
+                }
+            }
+        }))
+    }
+
     return (
         <div className='min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50'>
             <header className='bg-white shadow-sm sticky top-0 z-10 border-b border-gray-200'>
@@ -177,13 +196,26 @@ const Post = () => {
                     {post.comments.length > 0 && (
                         <div className='px-y py-3 space-y-3'>
                             {post.comments.map((comment)=>(
-                                <div key={comment.id}>
-                                        <img src={profile} alt="" />
+                                <div key={comment.id} className='flex gap-3'>
+                                        <img src={ "./profile.jpg" || comment?.profilepic } alt="" className='w-8 h-8 rounded-full border border-gray-200 ' />
+                                        <div className='flex-1 bg-white rounded-xl px-4 py-2 border border-gray-200'>
+                                            <p className='font-semibold text-sm text-gray-900 '>{comment.username} </p>
+                                            <p className=' text-gray-700 ' >{comment.text} </p>
+                                        </div>
                                 </div>
                             ) )}
 
                         </div>
                     )}
+                    <div className='px-4 py-3 flex gap-2'>
+                        <input type="text"
+                        value={commentInputs[post.id] || ''}
+                        onChange={(e)=> setCommentInputs({...commentInputs, [post.id]: e.target.value})} 
+                        placeholder='Write a comments.........' 
+                        className='flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none'/>
+                        <button onClick={()=>addcomment}></button>
+
+                    </div>
 
                   </div>
                         </div>
