@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Authcontrol from '../../controlauth/authcontrol';
-import { Heart, ImageIcon, MessageCircle, X } from 'lucide-react';
+import { Heart, ImageIcon, MessageCircle, Send, X } from 'lucide-react';
 
 const Post = () => {
     const [post, setpost] = useState([{
@@ -39,7 +39,8 @@ const Post = () => {
     const [commentInputs, setCommentInputs] = useState({});
     const fileinputref = useRef()
 
-    const { authUser } = Authcontrol()
+    const { authUser } = Authcontrol();
+
     const handleImagechange = (e) => {
         const file = e.target.files[0];
         if (!file.type.startsWith("image/")) {
@@ -61,14 +62,15 @@ const Post = () => {
         const post = {
             id: authUser.id,
             username: authUser.Fullname,
-            avatar: authUser.profile || "./profile.jpg",
+            avatar: "./profile.jpg" || authUser.profile ,
             content: newPost.content,
             image: newPost.image,
             like: 0,
             liked: false,
             comments: [],
+            timestamp: "just now"
         }
-        setpost([post, ...post])
+        setpost( (prevpost) => [post, ...prevpost])
         setnewPost({ content: "", image: null })
         setImagePreview(null);
         setShowCreatePost(false);
@@ -93,8 +95,11 @@ const Post = () => {
                     ...p,
                     comments: [...p.comments, newcomment]
                 }
+                
             }
-        }))
+            return p;
+        }));
+        setCommentInputs({...commentInputs, [postId] : ''})
     }
 
     return (
@@ -213,7 +218,9 @@ const Post = () => {
                         onChange={(e)=> setCommentInputs({...commentInputs, [post.id]: e.target.value})} 
                         placeholder='Write a comments.........' 
                         className='flex-1 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none'/>
-                        <button onClick={()=>addcomment}></button>
+                        <button onClick={()=>addcomment(post.id)} className='p-2 bg-gray-700 text-white rounded-full hover:shadow-lg transition-all'>
+                            <Send size={20} />
+                        </button>
 
                     </div>
 
