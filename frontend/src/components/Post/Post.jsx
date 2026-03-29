@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Authcontrol from '../../controlauth/authcontrol';
 import { Heart, ImageIcon, MessageCircle, Send, X } from 'lucide-react';
+import postAuthstore from '../../controlauth/postauth';
 
 const Post = () => {
     const [post, setpost] = useState([{
@@ -40,6 +41,11 @@ const Post = () => {
     const fileinputref = useRef()
 
     const { authUser } = Authcontrol();
+    const {addpost} = postAuthstore()
+
+   
+
+
 
     const handleImagechange = (e) => {
         const file = e.target.files[0];
@@ -57,7 +63,7 @@ const Post = () => {
 
     }
 
-    const createpost = () => {
+    const createpost = async () => {
         if (!newPost.content.trim() && !newPost.image) return;
         const post = {
             id: authUser.id,
@@ -71,11 +77,20 @@ const Post = () => {
             timestamp: "just now"
         }
         setpost( (prevpost) => [post, ...prevpost])
+        await  addpost({
+            id: authUser.id,
+            contents: newPost.content,
+            images: newPost.image
+
+        
+    }
+    )
         setnewPost({ content: "", image: null })
         setImagePreview(null);
         setShowCreatePost(false);
 
     }
+
     const Tooglelike = (postId) => {
         setpost(post.map(p => p.id === postId ? { ...p, liked: !p.liked, like: p.liked ? p.like - 1 : p.like + 1 } : p))
     }

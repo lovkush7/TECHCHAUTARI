@@ -32,5 +32,18 @@ class PostService {
         }
 
     }
+
+    async PostLikes(
+        like: number,
+        postId: string,
+        userId: string
+ 
+    ){
+        try{
+
+        }catch(err){
+            throw err;
+        }
+    }
 }
 export default new PostService();

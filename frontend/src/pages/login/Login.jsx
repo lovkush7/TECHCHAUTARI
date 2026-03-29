@@ -36,7 +36,7 @@ const Login = () => {
 
     }
   return (
-    <div className='container'>
+    <div className='container w-full'>
         <form className='form' action="" onSubmit={handlesubmit}>
             <div className="header-part">
               <img style={{width:"6rem", height:"6rem"}} src="./Teech.png" alt="" />

@@ -16,6 +16,7 @@ import PendingrequestController from "../controller/PendingRequest/Pendingreques
 import GetSendRequstController from "../controller/GetsendRequest/GetSendRequst.controller.ts";
 import PostController from "../controller/Post/Post.controller.ts";
 import LogoutController from "../controller/logout/Logout.controller.ts";
+import GetLikesController from "../controller/getlikes/GetLikes.controller.ts";
 
 
 const router = Router();
@@ -100,6 +101,10 @@ router.post("/posts",protectedroute,async(req,res)=>{
     data: user
   })
  
+    router.post("/post/like/:postId", async(req,res)=>{
+      const user = await GetLikesController.likePost(req,res)
+    })
+
 })
  
 export default router;
