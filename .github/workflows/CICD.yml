@@ -1,5 +1,4 @@
 # name: CICD OF TECHCHAUTARI
-
 # on: 
 #   push:
 #     branches: ["main"]
