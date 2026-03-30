@@ -8,8 +8,8 @@ import router from "./route/User.routes.ts";
 import { app , server} from "./config/socket.config.ts";
 
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.json({limit: "15mb"}));
+app.use(express.urlencoded({extended:true, limit:"15mb"}));
 app.use(cors(
     {
         origin: "http://localhost:5173",

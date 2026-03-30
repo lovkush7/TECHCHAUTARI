@@ -8,7 +8,9 @@ class PostCommentService {
         userId: string
     ){
         try{
-            if (!comment || comment.trim() === "") {
+            console.log(comment);
+            console.log(postId)
+            if (!comment) {
     return {
         success: false,
         message: "Comment cannot be empty"

@@ -105,7 +105,7 @@ router.post("/posts",protectedroute,async(req,res)=>{
  
 
 })
-router.post("/post/comments/:PostId", protectedroute, async(req,res)=>{
+router.post("/post/comments/:postId", protectedroute, async(req,res)=>{
   const user = await PostCommentController.PostComment(req,res)
   res.json({
     success: true,

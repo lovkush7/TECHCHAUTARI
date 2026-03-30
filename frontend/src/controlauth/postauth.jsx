@@ -23,10 +23,10 @@ const postAuthstore = create((set,get)=>({
         }
     },
 
-   sendcomment: async(comment)=>{
+   sendcomment: async({postId, comment})=>{
 
     try{
-        const {postId} = get();
+        
         
         const commenT = await api.post(`/auth/post/comments/${postId}`,comment)
         console.log("the comment is "+commenT.data);

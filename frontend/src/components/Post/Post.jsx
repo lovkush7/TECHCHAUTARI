@@ -104,6 +104,12 @@ const Post = () => {
     const addcomment = async(postId)=>{
         const commentText = commentInputs[postId];
         if(!commentText?.trim()) return;
+           await sendcomment({
+        postId: postId,
+       comment: commentText,
+    }
+        
+     )
 
         setpost(post.map(p=> {
             if(p.id === postId){
@@ -120,11 +126,7 @@ const Post = () => {
             }
             return p;
         }));
-         await sendcomment({
-       comment: commentInputs
-    }
-        
-     )
+      
         setCommentInputs({...commentInputs, [postId] : ''})
     }
 
