@@ -1,4 +1,4 @@
-import { Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import Commonentities from "./Common.entities.ts";
 import { User } from "./User.entities.ts";
 import Posts from "./Post.entities.ts";
@@ -10,6 +10,10 @@ class PostComment extends Commonentities{
 
     @ManyToOne(()=>Posts,(post)=>post.postcomments)
     post: Posts;
+
+    @Column({type:"text"})
+    comment: string;
+
 
 }
 export default PostComment;

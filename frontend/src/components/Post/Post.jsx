@@ -41,7 +41,7 @@ const Post = () => {
     const fileinputref = useRef()
 
     const { authUser } = Authcontrol();
-    const {addpost} = postAuthstore()
+    const {addpost,sendcomment,postID} = postAuthstore()
 
    
 
@@ -66,7 +66,7 @@ const Post = () => {
     const createpost = async () => {
         if (!newPost.content.trim() && !newPost.image) return;
         const post = {
-            id: authUser.id,
+            id: crypto.randomUUID() ,
             username: authUser.Fullname,
             avatar: "./profile.jpg" || authUser.profile ,
             content: newPost.content,
@@ -78,13 +78,19 @@ const Post = () => {
         }
         setpost( (prevpost) => [post, ...prevpost])
         await  addpost({
-            id: authUser.id,
+            id: crypto.randomUUID(),
             contents: newPost.content,
             images: newPost.image
 
         
     }
     )
+    //  await postID(crypto.randomUUID())
+      await postID(post.id)
+    //  await sendcomment({
+    //     commentInputs
+        
+    //  })
         setnewPost({ content: "", image: null })
         setImagePreview(null);
         setShowCreatePost(false);
@@ -95,14 +101,14 @@ const Post = () => {
         setpost(post.map(p => p.id === postId ? { ...p, liked: !p.liked, like: p.liked ? p.like - 1 : p.like + 1 } : p))
     }
 
-    const addcomment = (postId)=>{
+    const addcomment = async(postId)=>{
         const commentText = commentInputs[postId];
         if(!commentText?.trim()) return;
 
         setpost(post.map(p=> {
             if(p.id === postId){
                 const newcomment ={
-                    id: Date.now(),
+                    id: crypto.randomUUID(),
                     username: authUser.Fullname,
                     text: commentText
                 }
@@ -114,6 +120,11 @@ const Post = () => {
             }
             return p;
         }));
+         await sendcomment({
+       comment: commentInputs
+    }
+        
+     )
         setCommentInputs({...commentInputs, [postId] : ''})
     }
 

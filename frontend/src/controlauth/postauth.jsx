@@ -1,8 +1,10 @@
 import { create } from "zustand"
 import api from "../api/api";
+import Post from "../components/Post/Post";
 
-const postAuthstore = create((set)=>({
+const postAuthstore = create((set,get)=>({
     Post:[],
+    postId: null,
 
     addpost:async(post)=>{
         try{
@@ -11,21 +13,38 @@ const postAuthstore = create((set)=>({
             
             set((state)=>({
                 Post: [...state.post, newpost.data]
-            }))
+            }
+        
+        ))
+            
 
         }catch(err){
             console.log("the error is "+err)
         }
     },
 
-    sendComment: async(postId, comment) => {
-            try {
-                const response = await api.post(`/auth/comments/${postId}`, comment);
-                set((state) => ({
-                    Post: state.Post.map((post) =>
-                        post.id === postId ? { ...post, comments: [...post.comments, response.data] } : post
-                    )
-                }));
+   sendcomment: async(comment)=>{
+
+    try{
+        const {postId} = get();
+        
+        const commenT = await api.post(`/auth/post/comments/${postId}`,comment)
+        console.log("the comment is "+commenT.data);
+        set((state)=>({
+            Post: state.Post.map((post)=>
+            post.id === postId ? {...post, comments: [...post.comments, comment.data]} : post
+            )
+        }))
+
+    }catch(err){
+        console.log(err);
+    }
+   },
+
+    postID: async(postId)=>{
+        set({postId})
+
+    }
                         
 
 }))
