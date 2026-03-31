@@ -28,7 +28,7 @@ const postAuthstore = create((set,get)=>({
     try{
         
         
-        const commenT = await api.post(`/auth/post/comments/${postId}`,comment)
+        const commenT = await api.post(`/auth/post/comments/${postId}`,{comment})
         console.log("the comment is "+commenT.data);
         set((state)=>({
             Post: state.Post.map((post)=>

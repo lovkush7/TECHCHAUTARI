@@ -78,7 +78,7 @@ const Post = () => {
         }
         setpost( (prevpost) => [post, ...prevpost])
         await  addpost({
-            id: crypto.randomUUID(),
+            // id: crypto.randomUUID(),
             contents: newPost.content,
             images: newPost.image
 
