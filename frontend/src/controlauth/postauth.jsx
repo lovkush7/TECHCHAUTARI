@@ -40,11 +40,16 @@ const postAuthstore = create((set,get)=>({
         
         const commenT = await api.post(`/auth/post/comments/${postId}`,{comment})
         console.log("the comment is ", commenT.data);
-        set((state)=>({
-            Post: state.Post.map((post)=>
-            post.id === postId ? {...post, comments: [...post.comments, commenT.data]} : post
-            )
-        }))
+       set((state)=>({
+   Post: {
+      ...state.Post,
+      data: state.Post.data.map((p)=>
+         p.id === postId
+           ? { ...p, postcomments: [...p.postcomments, response.data] }
+           : p
+      )
+   }
+}))
 
     }catch(err){
         console.log(err);

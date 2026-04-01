@@ -6,9 +6,12 @@ class GetPostController {
         try{
             const User = await Posts.find({
                 relations:{
-                    postcomments: true,
+                    postcomments: {
+                        user: true
+                    },
                     postlikes: true,
                     user: true
+                    
                 }
             });
             return  User; 

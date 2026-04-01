@@ -49,8 +49,16 @@ useEffect(()=>{
             image: p.image,
             likes: p.postlikes.length,
             liked: false,
-            comments: p.postcomments || [],
-            timestamp: "just now"
+            comments:  Array.isArray(p.postcomments)
+    ? p.postcomments.map((c) => ({
+          id: c.id,
+          username: c.user?.Fullname || "Anonymous", 
+          text: c.comment,
+          timestamp: new Date(c.createdat).toDateString() 
+      }))
+    : [],
+            //  p.postcomments || [],,
+            timestamp: new Date(p.createdat).toDateString()
         }))
 
         setpost(formattedPost)
