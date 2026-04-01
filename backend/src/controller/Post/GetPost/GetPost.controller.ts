@@ -9,7 +9,9 @@ class GetPostController {
                     postcomments: {
                         user: true
                     },
-                    postlikes: true,
+                    postlikes: {
+                        user: true
+                    },
                     user: true
                     
                 }

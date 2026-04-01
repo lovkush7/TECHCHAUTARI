@@ -23,6 +23,9 @@ class Envconfig {
    static CLOUD_API_KEY = process.env.CLOUD_API_KEY;
    static CLOUD_API_SECRET = process.env.CLOUD_API_SECRET;
 
+   //gogoleapi 
+   static GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+
 
 }
 export default Envconfig;

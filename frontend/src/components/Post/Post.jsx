@@ -30,7 +30,7 @@ const Post = () => {
     const fileinputref = useRef()
 
     const { authUser } = Authcontrol();
-    const {addpost,sendcomment,postID,Post,getPost} = postAuthstore()
+    const {addpost,sendcomment,postID,Post,getPost,sendlikes} = postAuthstore()
 
      useEffect(()=>{
         getPost();
@@ -47,8 +47,8 @@ useEffect(()=>{
             avatar: "./profile.jpg",
             content: p.contents,
             image: p.image,
-            likes: p.postlikes.length,
-            liked: false,
+            likes: Array.isArray(p.postlikes) ? p.postlikes.length : 0,   
+            liked: p.postlikes.some(like => like.user.id === authUser?.id),
             comments:  Array.isArray(p.postcomments)
     ? p.postcomments.map((c) => ({
           id: c.id,
@@ -94,7 +94,7 @@ useEffect(()=>{
             avatar: "./profile.jpg" || authUser.profile ,
             content: newPost.content,
             image: newPost.image,
-            like: 0,
+            likes: 0,
             liked: false,
             comments: [],
             timestamp: "just now"
@@ -120,8 +120,9 @@ useEffect(()=>{
 
     }
 
-    const Tooglelike = (postId) => {
-        setpost(post.map(p => p.id === postId ? { ...p, liked: !p.liked, like: p.liked ? p.like - 1 : p.like + 1 } : p))
+    const Tooglelike = async(postId) => {
+        setpost(post.map(p => p.id === postId ? { ...p, liked: !p.liked, likes: p.liked ? p.likes - 1 : p.likes + 1 } : p))
+      await  sendlikes(postId)
     }
 
     const addcomment = async(postId)=>{

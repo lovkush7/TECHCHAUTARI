@@ -32,6 +32,26 @@ const postAuthstore = create((set,get)=>({
             console.log("the error is ",err)
         }
     },
+    sendlikes: async (postId)=>{
+        try{
+            const res = await api.post("/auth/getlikes",{postId})
+            console.log("the response is ", res.data);
+            set((state)=>({
+                Post: {
+                   ...state.Post,
+                   data: state.Post.data.map((p)=>
+                      p.id === postId
+                        ? { ...p, likes: [...p.likes, res.data] }
+                        : p
+                   )
+                }
+             }))
+
+        }catch(err){
+            console.log(err)
+        }
+
+    },
 
    sendcomment: async({postId, comment})=>{
 
@@ -63,5 +83,7 @@ const postAuthstore = create((set,get)=>({
                         
 
 }))
+
+
 
 export default postAuthstore;

@@ -20,6 +20,7 @@ import GetLikesController from "../controller/getlikes/GetLikes.controller.ts";
 import PostComment from "../entities/Postcomment.entities.ts";
 import PostCommentController from "../controller/PostComment/PostComment.controller.ts";
 import GetPostController from "../controller/Post/GetPost/GetPost.controller.ts";
+import LikepostController from "../controller/Post/likedpost/Likepost.controller.ts";
 
 
 const router = Router();
@@ -122,7 +123,18 @@ router.post("/post/comments/:postId", protectedroute, async(req,res)=>{
     data: user
   })
 })   
+ 
+router.post("/getlikes", protectedroute, async(req,res)=>{
+const user = await LikepostController.likepost(req,res)
+res.json({
+  success: true, 
+  data: user
+})
+});
 
+router.post("/prompt",protectedroute,async()=>{
+  
+})
 
  
 export default router;
