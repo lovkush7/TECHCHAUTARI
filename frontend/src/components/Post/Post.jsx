@@ -4,33 +4,22 @@ import { Heart, ImageIcon, MessageCircle, Send, X } from 'lucide-react';
 import postAuthstore from '../../controlauth/postauth';
 
 const Post = () => {
-    const [post, setpost] = useState([{
-        id: 1,
-        username: "Sarah Johnson",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-        content: "Just launched my new project! 🚀 Excited to share it with everyone.",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
-        likes: 42,
-        liked: false,
-        comments: [
-            { id: 1, username: "Mike Chen", text: "Congratulations! This looks amazing!" },
-            { id: 2, username: "Emma Davis", text: "Can't wait to try it out! 🎉" }
-        ],
-        timestamp: "2 hours ago"
-    },{
-        id: 2,
-        username: "Johnson",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
-        content: "Just launched my new project! 🚀 Excited to share it with everyone.",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
-        likes: 42,
-        liked: false,
-        comments: [
-            { id: 1, username: "Mike Chen", text: "Congratulations! This looks amazing!" },
-            { id: 2, username: "Emma Davis", text: "Can't wait to try it out! 🎉" }
-        ],
-        timestamp: "2 hours ago"
-    },]);
+    const [post, setpost] = useState([
+    //     {
+    //     id: 1,
+    //     username: "Sarah Johnson",
+    //     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    //     content: "Just launched my new project! 🚀 Excited to share it with everyone.",
+    //     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+    //     likes: 42,
+    //     liked: false,
+    //     comments: [
+    //         { id: 1, username: "Mike Chen", text: "Congratulations! This looks amazing!" },
+    //         { id: 2, username: "Emma Davis", text: "Can't wait to try it out! 🎉" }
+    //     ],
+    //     timestamp: "2 hours ago"
+    // },
+]);
     const [newPost, setnewPost] = useState({
         content: "",
         image: null
@@ -46,9 +35,28 @@ const Post = () => {
      useEffect(()=>{
         getPost();
         console.log("the post is:", Post);
-        // setpost(Post.data)
+        
        
      },[])
+useEffect(()=>{
+    if(Post && Post.data){
+
+        const formattedPost = Post.data.map((p)=>({
+            id: p.id,
+            username: p.user.Fullname,
+            avatar: "./profile.jpg",
+            content: p.contents,
+            image: p.image,
+            likes: p.postlikes.length,
+            liked: false,
+            comments: p.postcomments || [],
+            timestamp: "just now"
+        }))
+
+        setpost(formattedPost)
+    }
+},[Post])
+
 
     //  Post.map((pp)=>{
     
@@ -198,7 +206,7 @@ const Post = () => {
                     </div>
                 )}
                 <div className='space-y-6'>
-                    {post.map((post) => (
+                    { Array.isArray(post) && post.map((post) => (
                         <div key={post.id} className='bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300'>
                             <div className='p-6 flex items-center gap-3'>
                                 <img src={post.avatar} alt={post.username} className='w-12 h-12 rounded-full border-2 border-blue-600 object-cover' />
