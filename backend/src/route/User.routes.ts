@@ -19,6 +19,7 @@ import LogoutController from "../controller/logout/Logout.controller.ts";
 import GetLikesController from "../controller/getlikes/GetLikes.controller.ts";
 import PostComment from "../entities/Postcomment.entities.ts";
 import PostCommentController from "../controller/PostComment/PostComment.controller.ts";
+import GetPostController from "../controller/Post/GetPost/GetPost.controller.ts";
 
 
 const router = Router();
@@ -102,9 +103,18 @@ router.post("/posts",protectedroute,async(req,res)=>{
     success: true,
     data: user
   })
+
+
  
 
 })
+  router.get("/getpost",protectedroute,async(req,res)=>{
+  const user = await GetPostController.getPost();
+  res.json({
+    success:true,
+    data: user
+  })
+  })
 router.post("/post/comments/:postId", protectedroute, async(req,res)=>{
   const user = await PostCommentController.PostComment(req,res)
   res.json({

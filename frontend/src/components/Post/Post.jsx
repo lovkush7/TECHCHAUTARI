@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Authcontrol from '../../controlauth/authcontrol';
 import { Heart, ImageIcon, MessageCircle, Send, X } from 'lucide-react';
 import postAuthstore from '../../controlauth/postauth';
@@ -41,11 +41,18 @@ const Post = () => {
     const fileinputref = useRef()
 
     const { authUser } = Authcontrol();
-    const {addpost,sendcomment,postID} = postAuthstore()
+    const {addpost,sendcomment,postID,Post,getPost} = postAuthstore()
 
-   
+     useEffect(()=>{
+        getPost();
+        console.log("the post is:", Post);
+        // setpost(Post.data)
+       
+     },[])
 
-
+    //  Post.map((pp)=>{
+    
+    //  })
 
     const handleImagechange = (e) => {
         const file = e.target.files[0];
@@ -104,6 +111,7 @@ const Post = () => {
     const addcomment = async(postId)=>{
         const commentText = commentInputs[postId];
         if(!commentText?.trim()) return;
+
            await sendcomment({
         postId: postId,
        comment: commentText,
@@ -114,7 +122,7 @@ const Post = () => {
         setpost(post.map(p=> {
             if(p.id === postId){
                 const newcomment ={
-                    id: crypto.randomUUID(),
+                    id: p.id, 
                     username: authUser.Fullname,
                     text: commentText
                 }
@@ -239,7 +247,11 @@ const Post = () => {
                             ) )}
 
                         </div>
-                    )}
+                    )} 
+                    {/* {Post.map((p)=>(
+                        <div><p className="id">{console.log(p.id)}</p></div> 
+                    ))} */}
+
                     <div className='px-4 py-3 flex gap-2'>
                         <input type="text"
                         value={commentInputs[post.id] || ''}

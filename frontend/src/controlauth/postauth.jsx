@@ -9,10 +9,10 @@ const postAuthstore = create((set,get)=>({
     addpost:async(post)=>{
         try{
             const newpost = await api.post("/auth/posts",post)
-            console.log("post error"+newpost.data)
+            console.log("post error",newpost.data)
             
             set((state)=>({
-                Post: [...state.post, newpost.data]
+                Post: [...state.Post, newpost.data]
             }
         
         ))
@@ -23,16 +23,26 @@ const postAuthstore = create((set,get)=>({
         }
     },
 
+    getPost: async()=>{
+        try{
+            const Posts = await api.get("/auth/getpost")
+            set({Post: Posts.data})
+            console.log("the post is ",Posts.data);
+        }catch(err){
+            console.log("the error is ",err)
+        }
+    },
+
    sendcomment: async({postId, comment})=>{
 
     try{
         
         
         const commenT = await api.post(`/auth/post/comments/${postId}`,{comment})
-        console.log("the comment is "+commenT.data);
+        console.log("the comment is ", commenT.data);
         set((state)=>({
             Post: state.Post.map((post)=>
-            post.id === postId ? {...post, comments: [...post.comments, comment.data]} : post
+            post.id === postId ? {...post, comments: [...post.comments, commenT.data]} : post
             )
         }))
 
