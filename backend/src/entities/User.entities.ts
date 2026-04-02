@@ -13,6 +13,7 @@ import FriendRequest from "./Friendrequest.entities.ts";
 import Posts from "./Post.entities.ts";
 import PostLikes from "./Postlikes.entities.ts";
 import PostComment from "./Postcomment.entities.ts";
+import Job from "./job.entities.ts";
 // import { messages } from "./messages.entities.ts";
 
 
@@ -56,6 +57,9 @@ export class User extends Commonentities{
 
     @OneToMany(()=>PostComment ,(comment)=>comment.user)
     postcomments: PostComment[]
+
+    @OneToMany(()=>Job, (job)=>job.user)
+    jobs: Job[]
 
     @BeforeInsert()
     _(){

@@ -21,6 +21,7 @@ import PostComment from "../entities/Postcomment.entities.ts";
 import PostCommentController from "../controller/PostComment/PostComment.controller.ts";
 import GetPostController from "../controller/Post/GetPost/GetPost.controller.ts";
 import LikepostController from "../controller/Post/likedpost/Likepost.controller.ts";
+import chatbotController from "../controller/chatbot/chatbot.controller.ts";
 
 
 const router = Router();
@@ -132,8 +133,12 @@ res.json({
 })
 });
 
-router.post("/prompt",protectedroute,async()=>{
-  
+router.post("/prompt",protectedroute,async(req,res)=>{
+  const user = await chatbotController.prompt(req,res)
+  res.json({
+    success: true,
+    data: user
+  })
 })
 
  
