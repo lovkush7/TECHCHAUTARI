@@ -11,3 +11,9 @@ export enum ProposalStatus{
     ACCEPTED = "ACCEPTED",
     REJECTED = "REJECTED"
 }
+
+export enum milestoneStauts {
+    PENDING = "PENDING",
+     SUBMITTED ="SUBMITTED",
+     PAID = "PAID",
+}

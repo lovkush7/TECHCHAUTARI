@@ -1,7 +1,9 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import Commonentities from "./Common.entities.ts";
 import { ProjectStatus } from "../enums/projectstatus.enums.ts";
 import { User } from "./User.entities.ts";
+import proposal from "./Proposal.entities.ts";
+import Contract from "./Contract.entities.ts";
 @Entity()
 class Job extends Commonentities{
 
@@ -22,6 +24,12 @@ class Job extends Commonentities{
 
     @ManyToOne(()=>User, (user)=>user.jobs)
     user: User;
+
+    @OneToMany(()=>proposal, (p)=>p.jobs)
+    proposals: proposal[]
+
+    @OneToMany(()=>Contract, (contract)=>contract.user)
+    contracts: Contract[]
 
 }
 export default Job;

@@ -14,6 +14,9 @@ import Posts from "./Post.entities.ts";
 import PostLikes from "./Postlikes.entities.ts";
 import PostComment from "./Postcomment.entities.ts";
 import Job from "./job.entities.ts";
+import proposal from "./Proposal.entities.ts";
+import Contract from "./Contract.entities.ts";
+import Rating from "./Review.entities.ts";
 // import { messages } from "./messages.entities.ts";
 
 
@@ -60,6 +63,15 @@ export class User extends Commonentities{
 
     @OneToMany(()=>Job, (job)=>job.user)
     jobs: Job[]
+
+    @OneToMany(()=>proposal, (proposal)=>proposal.user)
+    proposals: proposal[]
+
+    @OneToMany(()=>Contract, (Contract)=>Contract.user)
+    contracts: Contract[]
+
+    @OneToMany(()=>Rating, (rating)=>rating.user)
+    ratings: Rating[]
 
     @BeforeInsert()
     _(){
