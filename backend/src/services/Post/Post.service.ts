@@ -34,9 +34,7 @@ class PostService {
     }
 
     async PostLikes(
-        like: number,
-        postId: string,
-        userId: string
+        
  
     ){
         try{

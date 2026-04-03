@@ -22,6 +22,8 @@ import PostCommentController from "../controller/PostComment/PostComment.control
 import GetPostController from "../controller/Post/GetPost/GetPost.controller.ts";
 import LikepostController from "../controller/Post/likedpost/Likepost.controller.ts";
 import chatbotController from "../controller/chatbot/chatbot.controller.ts";
+import SkillController from "../controller/skills/Skill.controller.ts";
+import projectControllers from "../controller/project/project.controllers.ts";
 
 
 const router = Router();
@@ -141,5 +143,30 @@ router.post("/prompt",protectedroute,async(req,res)=>{
   })
 })
 
+
+router.post("/skills",protectedroute, async(req,res)=>{
+  const user = await SkillController.addSkills(req,res)
+  res.json({
+    success: true,
+    data: user
+  })
+})
+
+router.get("/getskills", protectedroute, async (req,res)=>{
+ const user = await SkillController.getSkills(req,res);
+ res.json({
+  success: true,
+  data: user
+ })
+})
+
+  router.post("/projet",protectedroute,async (req,res)=>{
+    const user = await projectControllers.project(req,res)
+    res.json({
+      success: true,
+      data: user
+    })
+    
+  })
  
 export default router;

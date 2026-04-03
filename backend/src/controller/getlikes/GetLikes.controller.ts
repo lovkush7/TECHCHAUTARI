@@ -14,7 +14,7 @@ class LikeController {
             if(!userId){
                 return {success: false, message:"unauthorized user"}
             }
-            return await PostService.PostLikes(like,PostId,userId);
+            return await PostService.PostLikes();
 
 
         }catch(err){

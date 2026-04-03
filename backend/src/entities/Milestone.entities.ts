@@ -9,8 +9,8 @@ class Milestone extends Commonentities{
     @Column({type: "text"})
     title: string;
 
-    @Column({type:"number"})
-    amoung: number;
+    @Column({type:"int"})
+    amount: number;
 
     @Column({type: "enum", enum:milestoneStauts, default:milestoneStauts.PENDING})
     status: milestoneStauts;

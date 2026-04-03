@@ -4,6 +4,7 @@ import { ProjectStatus } from "../enums/projectstatus.enums.ts";
 import { User } from "./User.entities.ts";
 import proposal from "./Proposal.entities.ts";
 import Contract from "./Contract.entities.ts";
+import Rating from "./Review.entities.ts";
 @Entity()
 class Job extends Commonentities{
 
@@ -30,6 +31,9 @@ class Job extends Commonentities{
 
     @OneToMany(()=>Contract, (contract)=>contract.user)
     contracts: Contract[]
+
+    @OneToMany(()=>Rating, (rating)=>rating.project)
+    ratings: Rating[]
 
 }
 export default Job;

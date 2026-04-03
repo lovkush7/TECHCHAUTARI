@@ -8,7 +8,7 @@ class Payment extends Commonentities{
     @ManyToOne(()=>Milestone, (milestone)=> milestone.payments)
     milestone: Milestone;
      
-    @Column({type: "number"})
+    @Column({type: "int"})
     amount: number;
 
     @Column({type:"text"})
