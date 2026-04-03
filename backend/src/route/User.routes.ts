@@ -168,5 +168,13 @@ router.get("/getskills", protectedroute, async (req,res)=>{
     })
     
   })
+
+  router.get("/getproject", protectedroute, async(req,res)=>{
+   const user = await projectControllers.getproject(req,res)
+   res.json({
+    sucess: true,
+    data: user
+   })
+  })
  
 export default router;
