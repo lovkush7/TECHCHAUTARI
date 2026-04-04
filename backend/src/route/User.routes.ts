@@ -24,6 +24,7 @@ import LikepostController from "../controller/Post/likedpost/Likepost.controller
 import chatbotController from "../controller/chatbot/chatbot.controller.ts";
 import SkillController from "../controller/skills/Skill.controller.ts";
 import projectControllers from "../controller/project/project.controllers.ts";
+import proposalController from "../controller/proposal/proposal.controller.ts";
 
 
 const router = Router();
@@ -177,4 +178,44 @@ router.get("/getskills", protectedroute, async (req,res)=>{
    })
   })
  
+
+  router.get("/getproject/:projectId",protectedroute, async(req,res)=>{
+    const user = await projectControllers.GetSingleProject(req,res)
+    res.json({
+      success: true,
+      data: user
+    })
+  })
+
+  router.put("/updateproject/:projectId", protectedroute, async(req,res)=>{
+  const user = await projectControllers.updateProject(req,res)
+  res.json({
+    success: true,
+    data: user
+  })
+  })
+
+  router.delete("/deleteProject/:projectId",protectedroute, async(req,res)=>{
+ const user = await projectControllers.DeleteProject(req,res)
+ res.json({
+  success: true,
+  data: user
+ })
+  })
+
+  router.put("/changeStatus/:ProjectId",protectedroute, async(req,res)=>{
+   const user = await projectControllers.changeStatus(req,res)
+   res.json({
+    success: true,
+    data: user
+   })
+  })
+
+  router.post("/submitProposal/:projectId",protectedroute, async(req,res)=>{
+  const user = await proposalController.submitProposal(req,res);
+  res.json({
+    success: true,
+    data: user
+  })
+  })
 export default router;
