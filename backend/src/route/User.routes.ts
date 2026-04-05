@@ -218,4 +218,12 @@ router.get("/getskills", protectedroute, async (req,res)=>{
     data: user
   })
   })
+
+  router.get("/proposal/:projectId", protectedroute, async(req,res)=>{
+    const user = await proposalController.getproposal(req,res);
+    res.json({
+      success: true,
+      data: user
+    })
+  })
 export default router;
