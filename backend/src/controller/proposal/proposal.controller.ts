@@ -40,6 +40,7 @@ async submitProposal (
 ){
     try{
       const {projectId } =req.params;
+      const {coverLetter} = req.body
         if(!projectId){
             return "Project ID is required";
         }
@@ -55,6 +56,46 @@ async submitProposal (
     }
 
 }
+  async acceptProposal(
+  req: Request,
+  res: Response
+){
+    try{
+         
+        const {porposalId} = req.params;
+        if(!porposalId){
+            return "Proposal ID is required";
+        }
+        const userId = req.user?.id;
+        if(!userId){
+            return "Unauthorized user";
+        }
+     
+         return await proposalServices.AcceptProposal(porposalId, userId);
+    }catch(err){
+        console.log(err);
+    }}
+  
+    async rejectProposal(
+        req: Request,
+        res: Response
+    ){
+        try{
+            const {proposalId} = req.params;
+            if(!proposalId){
+                return "Proposal ID is required";
+            }
+            const userId = req.user?.id;
 
+            if(!userId){
+                return "Unauthorized user";
+            }
+            return await proposalServices.rejectProposal(proposalId, userId);
+
+        }catch(err){
+            console.log(err);
+        }
+
+    }
 }
 export default new ProposalController();

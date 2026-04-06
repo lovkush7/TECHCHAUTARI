@@ -25,6 +25,7 @@ import chatbotController from "../controller/chatbot/chatbot.controller.ts";
 import SkillController from "../controller/skills/Skill.controller.ts";
 import projectControllers from "../controller/project/project.controllers.ts";
 import proposalController from "../controller/proposal/proposal.controller.ts";
+import ContractController from "../controller/contract/Contract.controller.ts";
 
 
 const router = Router();
@@ -226,4 +227,29 @@ router.get("/getskills", protectedroute, async (req,res)=>{
       data: user
     })
   })
+
+  router.put("/acceptProposal/:proposalId", protectedroute, async(req,res)=>{
+   const user = await proposalController.acceptProposal(req,res)
+   res.json({
+    success: true,
+    data: user
+   })
+  })
+
+  router.put("/rejectProposal/:proposalId", protectedroute, async(req,res)=>{
+    const user = await proposalController.rejectProposal(req,res)
+    res.json({
+      success: true,
+      data: user
+    })
+  })
+
+router.post("/createContract", protectedroute, async(req,res)=>
+{
+ const user = await ContractController.createContract(req,res);
+ res.json({
+  success: true,
+  data: user
+ })
+})
 export default router;
