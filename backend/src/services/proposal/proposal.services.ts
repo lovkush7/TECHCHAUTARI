@@ -150,7 +150,7 @@ async AcceptProposal (
       .execute();
 
       const contract = new Contract();
-      contract.user = proposals.user;
+      contract.freelancer = proposals.user;
       contract.jobs = proposals.jobs;
       contract.agreedPrice = proposals.price;
         // contract.terms = proposals.coverLetter;

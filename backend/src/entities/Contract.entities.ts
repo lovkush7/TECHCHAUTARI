@@ -9,7 +9,7 @@ import { contractStatus, type milestoneStauts } from "../enums/projectstatus.enu
 class Contract extends Commonentities {
 
     @ManyToOne(()=>User, (user)=>user.contracts)
-    user: User;
+    freelancer: User;
 
     @ManyToOne(()=>Job,(job)=>job.contracts)
     jobs: Job;

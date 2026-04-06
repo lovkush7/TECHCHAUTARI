@@ -29,7 +29,7 @@ class Job extends Commonentities{
     @OneToMany(()=>proposal, (p)=>p.jobs)
     proposals: proposal[]
 
-    @OneToMany(()=>Contract, (contract)=>contract.user)
+    @OneToMany(()=>Contract, (contract)=>contract.freelancer)
     contracts: Contract[]
 
     @OneToMany(()=>Rating, (rating)=>rating.project)

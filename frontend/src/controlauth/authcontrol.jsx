@@ -89,6 +89,7 @@ const Authcontrol = create((set,get)=>({
         if(get().socket?.connected) get().socket.disconnect();
         
     },
+    
 
 }));
 export default Authcontrol;

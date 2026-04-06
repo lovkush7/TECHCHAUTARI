@@ -25,6 +25,7 @@ import SkillController from "../controller/skills/Skill.controller.ts";
 import projectControllers from "../controller/project/project.controllers.ts";
 import proposalController from "../controller/proposal/proposal.controller.ts";
 import ContractController from "../controller/contract/Contract.controller.ts";
+import MilestoneController from "../controller/milestone/Milestone.controller.ts";
 
 
 const router = Router();
@@ -260,7 +261,7 @@ router.get("/getcontract", protectedroute , async(req,res)=>{
  })
 })
 
-router.post("/createContract", protectedroute, async (req,res)=>{
+router.post("/createmilestones", protectedroute, async (req,res)=>{
   const user = await ContractController.createmilestone(req,res)
   res.json({
     success: true,
@@ -274,6 +275,22 @@ router.patch("/completeContract/:contractId", protectedroute, async(req,res)=>{
     success: true,
     data: user
   })
+})
+
+router.get("/getmilestone/:contractId",protectedroute, async (req,res)=>{
+  const user = await MilestoneController.getMilestone(req,res)
+  res.json({
+    success: true,
+    data: user
+  })
+})
+
+router.patch("/submitmilestone/:milestoneId", protectedroute , async (req,res)=>{
+const user = await MilestoneController.submitMilestone(req,res);
+res.json({
+  success: true,
+  data: user
+})
 })
 
 export default router;

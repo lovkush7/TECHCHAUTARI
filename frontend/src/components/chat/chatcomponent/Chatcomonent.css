@@ -10,12 +10,12 @@
     flex-direction: column;
     gap: 1rem;
 }
-  .chat-start{
+  /* .chat-start{
     align-self:flex-start;
 }
 .chat-end{
     align-self:flex-end;
- }  
+ }   */
 .chat-image {
     width: 2.5rem;
     height: 2.5rem;

@@ -27,7 +27,7 @@ const Sidebar = () => {
           onClick={()=>setselectedUsers(user)}
           className={`user-btn ${selectedUsers?.id === user?.id ? "active" : ""}`}
           >
-            <div className="user-profile">
+            <div className="user-avtarr">
               <img  src={"./profile.jpg" || user.profile} alt="ac" className='user-profile' />
               {onlineusers.includes(user.id) && (
                 <span className="online-indicator"></span>

@@ -69,7 +69,7 @@ export class User extends Commonentities{
     @OneToMany(()=>proposal, (proposal)=>proposal.user)
     proposals: proposal[]
 
-    @OneToMany(()=>Contract, (Contract)=>Contract.user)
+    @OneToMany(()=>Contract, (Contract)=>Contract.freelancer)
     contracts: Contract[]
 
     @OneToMany(()=>Rating, (rating)=>rating.reviewer)

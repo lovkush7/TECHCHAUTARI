@@ -18,41 +18,53 @@ const Chatcomponent = () => {
     return () => nonlistenTomessages()
   }, [selectedUsers?.id, getmessages, listenTomessages, nonlistenTomessages]);
 
-  return (
-    <div style={{
-      display: "flex", flexDirection: "column", flex: "1", overflow: "auto"
+  useEffect(() => {
+ if(MessageEndref.current && messages){
+  MessageEndref.current.scrollIntoView({ behavior: "smooth" });
+ }
 
-    }}>
+}, [messages]);
+
+  return (
+    <div className="flex-1 flex flex-col ">
       <ChatHeader />
-       <div className="chat-messages">
+       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg)=>(
           <div key={msg.id}
-          className={`chat ${msg.senderId === authUser.id ? "chat-end" : "chat-start"}`}>
+          className={`chat ${msg.sender?.id === authUser?.id ? "chat-end" : "chat-start"}` } ref={MessageEndref}  >
+            {/* {console.log("the senderid and authuserid", msg.sender.id, authUser.id)}
+            {console.log( "the messageis",msg)} */}
 
             <div className="chat-image avatar">
-              <div className="avatar-img">
-                <img style={{width:"100%",height:"100%",objectFit:"cover"}} src={msg.senderId === authUser.id ? authUser.profile || "./profile.jpg" : 
+              <div className="size-10 rounded-full border ">
+                <img src={msg.sender?.id === authUser?.id ? authUser.profile || "./profile.jpg" : 
                   selectedUsers.profile || './profile.jpg'} alt="" />
               </div>
             </div>
-                <div className="chat-header">
-                 
-                  <div  className={`chat-bubble ${ msg.senderId === authUser.id ? "chat-bubble-primary text-white" : "bg-base-300 "}`} >
-                    {msg.image && (
-                      <img style={{width:"7rem",height:"7rem"}} src={msg.image} alt="" />
-                    )}
-                    {msg.text && (
-                      <div className="max-w-xs">
-                      <p style={{fontSize:"1rem"}}>{msg.text}</p>
-                      </div>
-                    )}
-                  </div>
-                   <time datetime="">
+                {/* <div className="chat-header mb-1">
+                    <time className='text-xs opacity050 ml-1' datetime="">
                     {Formatmessagetime(msg.createdat)}
                   </time>
+                   
+                </div> */}
+                  <div className={`chat-bubble ${ msg.sender?.id === authUser?.id ? "chat-bubble-primary" : "chat-bubble-secondary" } flex flex-col`}>
+                    {msg.image && (
+                      <img className='sm:max-w-[100px] rounded-md mb-2' src={msg.image} alt="" />
+                    )}
+                   {msg.text ? <p>{msg.text}</p> : null}
+                 
+                  </div>
+                        <div className="chat-header mb-1">
+                    <time className='text-xs opacity050 ml-1' datetime="">
+                    {Formatmessagetime(msg.createdat)}
+                  </time>
+                   
                 </div>
+              
           </div>
+          
         ))}
+         
       </div>
       <Chatinput />
 

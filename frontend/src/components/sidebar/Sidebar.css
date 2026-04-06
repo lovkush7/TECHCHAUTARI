@@ -49,18 +49,31 @@
     background-color: #d1d5db;
     box-shadow: 0 0 0 2px #d1d5db;
 }
+.user-avtarr{
+    position: relative;   /* ✅ important */
+    width: 3rem;
+    height: 3rem;
+}
+
 .user-profile{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* .user-profile{
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
     object-fit: cover;
-}
+    position: relative;
+} */
 .online-indicator{
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 0.7rem;
+    height: 0.7rem;
     border-radius: 50%;
     background-color: #22c55e;
     box-shadow: 0 0  0 2px #18181b;

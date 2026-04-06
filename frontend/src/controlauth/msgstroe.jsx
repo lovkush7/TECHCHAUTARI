@@ -39,17 +39,38 @@ const Usemessages = create((set,get)=>({
             set({ismessageloading:false})
         }
     },
-    sendmessages: async(messagedata)=>{
-        try{
-            const {messages,selectedUsers} = get();
+ sendmessages: async (messagedata) => {
+  try {
+    const { messages, selectedUsers } = get();
+    const { authUser } = Authcontrol.getState();
 
-            const response  = await api.post(`/auth/sendmessages/${selectedUsers.id}`,messagedata);
-            set({messages: [...messages, response.data]})
+    const response = await api.post(`/auth/sendmessages/${selectedUsers.id}`, messagedata);
+    
+    // Extract the actual message (nested in response.data.data)
+    const messageData = response.data.data ?? response.data; 
 
-        }catch(err){
-            console.log("the error is "+err)
-        }
-    },
+    // Normalize sender/receiver
+    const newMessage = {
+      id: messageData.id,
+      text: messageData.text || "",              // ensure text exists
+      image: messageData.image || null,
+      createdat: messageData.createdat || new Date().toISOString(),
+      sender: {
+        id: messageData.sender?.id || authUser.id,
+        profile: messageData.sender?.profile || authUser.profile || "./profile.jpg",
+      },
+      reciver: {
+        id: messageData.reciver?.id || selectedUsers.id,
+        profile: messageData.reciver?.profile || selectedUsers.profile || "./profile.jpg",
+      },
+    };
+
+    set({ messages: [...messages, newMessage] });
+
+  } catch (err) {
+    console.log("the error is " + err);
+  }
+},
     setselectedUsers: async(selectedUsers)=>{
         set({selectedUsers})
 

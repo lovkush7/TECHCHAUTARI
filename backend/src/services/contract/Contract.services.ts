@@ -46,7 +46,7 @@ class ContractService {
 
               const contract = new Contract()
                contract.jobs =  proposals.jobs;
-               contract.user = proposals.user;
+               contract.freelancer = proposals.user;
                contract.agreedPrice =  proposals.price;
                contract.terms = terms;
                await contract.save()
@@ -72,13 +72,13 @@ class ContractService {
                 },
                 relations:{
                     jobs: true,
-                    user: true
+                    freelancer: true
                 }
             })
         }else {
                 contracts =  await Contract.find({
                  where:{
-                    user: {id: userId}
+                    freelancer: {id: userId}
                  },
                  relations:{
                     jobs:true,
