@@ -17,3 +17,8 @@ export enum milestoneStauts {
      SUBMITTED ="SUBMITTED",
      PAID = "PAID",
 }
+
+export enum contractStatus{
+    PENDING = "PENDING",
+    COMPLETED = "COMPLETED"
+}

@@ -15,8 +15,7 @@ class Milestone extends Commonentities{
     @Column({type: "enum", enum:milestoneStauts, default:milestoneStauts.PENDING})
     status: milestoneStauts;
 
-    @Column({type:"text",nullable: true})
-    description: string;
+  
 
     @Column({type:"date", nullable: true})
     dateLine: Date

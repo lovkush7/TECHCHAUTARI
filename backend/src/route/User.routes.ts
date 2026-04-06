@@ -4,7 +4,6 @@ import loginController from "../controller/login/login.controller.ts";
 import protectedroute from "../middleware/protectedroute.ts";
 // import CheckController from "../controller/check/Check.controller.ts";
 import profileController from "../controller/profile/profile.controller.ts";
-
 import GetuserControllers from "../controller/getusers/Getuser.controllers.ts";
 import SendmessageControllers from "../controller/sendmessage/Sendmessage.controllers.ts";
 import GetmessagesControllers from "../controller/getmessages/Getmessages.controllers.ts";
@@ -252,4 +251,29 @@ router.post("/createContract", protectedroute, async(req,res)=>
   data: user
  })
 })
+
+router.get("/getcontract", protectedroute , async(req,res)=>{
+ const user = await ContractController.getContract(req,res)
+ res.json({
+  success: true,
+  data: user
+ })
+})
+
+router.post("/createContract", protectedroute, async (req,res)=>{
+  const user = await ContractController.createmilestone(req,res)
+  res.json({
+    success: true,
+    data: user
+  })
+})
+
+router.patch("/completeContract/:contractId", protectedroute, async(req,res)=>{
+  const user = await ContractController.completecontract(req,res)
+  res.json({
+    success: true,
+    data: user
+  })
+})
+
 export default router;
