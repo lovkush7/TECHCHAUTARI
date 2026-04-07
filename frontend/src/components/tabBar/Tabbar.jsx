@@ -12,7 +12,7 @@ const Tabbar = () => {
     const [activeTab, SetActiveTab]= useState("About")
   return (
     <>
-    <div className='bg-white rounded-2xl border border-stone-300 shadow px-2 py-2 flex gap-1'>
+    <div className='bg-white rounded-2xl border border-stone-300 shadow px-2 py-2 flex gap-2 mb-5'>
         {tabs.map((tab)=>(
             <button key={tab} onClick={()=>SetActiveTab(tab)} 
             className={`flex-1 capitalize font-medium  px-4 py-2 rounded-lg transistion-all ${activeTab === tab ? 'bg-black text-white' : 'bg-gray-200 text-gray-700'}`}>

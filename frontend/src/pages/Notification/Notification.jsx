@@ -5,8 +5,11 @@ import ProfileCard from '../../components/profile/profileCard/ProfileCard'
 import Skills from '../../components/profile/skills/Skills'
 import Avaibility from '../../components/Post/avaibility/Avaibility'
 import Tabbar from '../../components/tabBar/Tabbar'
+import Authcontrol from '../../controlauth/authcontrol'
 
 const Notification = () => {
+    const {logout} = Authcontrol()
+    console.log()
   return (
     <div>
         <Navbar/>
@@ -26,6 +29,9 @@ const Notification = () => {
       <main className='bg-white p-5 rounded-xl shadow'>
          <Tabbar/>
       </main>
+
+        
+      
 
 
   </div>

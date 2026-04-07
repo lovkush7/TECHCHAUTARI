@@ -3,6 +3,7 @@ import "./Home.css"
 import Navbar from '../../components/Navbar/Navbar'
 import Authcontrol from '../../controlauth/authcontrol'
 import Post from '../../components/Post/Post'
+import { LogOut } from 'lucide-react'
 
 const Home = () => {
 
@@ -13,9 +14,9 @@ const Home = () => {
      <Post/>
       
    
-      <div className="logoout">
-        <button className='border rounded-2xl p-6 bg-green-500 text-white '  onClick={logout}>
-          logout
+      <div className="logoout flex justify-end mr-5 mt-5 ">
+        <button className='   border rounded-2xl px-2 py-2 bg-black text-white '  onClick={logout}>
+          <LogOut size={24} />
         </button>
       </div>
 
