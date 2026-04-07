@@ -3,6 +3,7 @@ import { User } from "../entities/User.entities.ts";
 // import type { Request } from "express-serve-static-core";
 import bcrypt from "bcrypt"
 import generateToken from "../utils/jwt.token.ts";
+import { profile } from "console";
 
 class Loginservice {
     async login(
@@ -22,6 +23,10 @@ class Loginservice {
             const user = await User.findOne({
                 where:{
                     email
+                },
+                relations:{
+                    profile: true
+
                 }
             });
             if(!user){
@@ -40,7 +45,9 @@ class Loginservice {
                 success: true,
                 message: "user login successfully",
                 email: user.email,
-                fullname: user.Fullname
+                fullname: user.Fullname,
+                profile: user.profile
+                
             })
 
         }catch(err){

@@ -5,7 +5,7 @@ import Skill from "./Skill.entities.ts";
 @Entity()
 export class UserProfile extends Commonentities{
 
-    @Column({type:"text"})
+    @Column({type:"text", nullable: true})
      profilepic: string;
 
      @Column({type:"text"})
@@ -13,6 +13,14 @@ export class UserProfile extends Commonentities{
 
      @Column({type:"text"})
      hourlyRate: string;
+
+     @Column({type:"text"})
+     location: string;
+
+     @Column({type:"text"})
+    About: string;
+
+
 
      @ManyToMany(()=> Skill)
      @JoinTable()

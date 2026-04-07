@@ -26,6 +26,7 @@ import projectControllers from "../controller/project/project.controllers.ts";
 import proposalController from "../controller/proposal/proposal.controller.ts";
 import ContractController from "../controller/contract/Contract.controller.ts";
 import MilestoneController from "../controller/milestone/Milestone.controller.ts";
+import ProfileinfoController from "../profileInfo/Profileinfo.controller.ts";
 
 
 const router = Router();
@@ -44,7 +45,7 @@ router.post("/logout",protectedroute,LogoutController.logout)
 
 
 
-router.put("/update",protectedroute,async(req,res)=>{
+router.post("/profile",protectedroute,async(req,res)=>{
     const user = await profileController.Profile(req,res);
 
     res.status(200).json({ data: user});
@@ -291,6 +292,14 @@ res.json({
   success: true,
   data: user
 })
+})
+router.post("/createProfile",protectedroute,async(req,res)=>{
+  const user = await ProfileinfoController.createProfile(req,res);
+  res.json({
+    success: true,
+    data: user
+  })
+
 })
 
 export default router;

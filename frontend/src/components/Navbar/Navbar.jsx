@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import "./Navbar.css"
 import { HiHome } from "react-icons/hi";
 import { IoPeopleSharp } from "react-icons/io5";
-import { BsPersonWorkspace } from "react-icons/bs";
+import { BsPersonFillCheck, BsPersonFillGear, BsPersonWorkspace } from "react-icons/bs";
 import { BsChatRightDots } from "react-icons/bs";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { UserRound } from "lucide-react"
 import { CiSearch } from "react-icons/ci";
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
@@ -49,8 +50,8 @@ const Navbar = () => {
         <li  onClick={()=>navigate("/notification")}
         className={menu === "/notification"?"active":""}
          style={{display:"flex",flexDirection:"column",justifyContent:"center", alignItems:'center',gap:"4px"}}>
-            <IoNotificationsOutline   style={{fontSize:'1.5rem'}} />
-          notifications
+            <UserRound  style={{fontSize:'1.5rem'}} />
+           profile
         </li>
       </ul>
       <div style={{display:"flex",justifyContent:'center',alignItems:"center",minWidth:'9rem'}} className="navbar-right">

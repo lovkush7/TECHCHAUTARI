@@ -11,13 +11,13 @@ class UserProfileServices {
         res: Response
     ){
         try{
-            const {profilepic} = req.body;
+            const {profilepic,bio,hourlyRate,location,About} = req.body;
 
              const userid = req.user?.id;
 
-             if(!profilepic){
-                return {success:false, message: "please provide the profile pics"}
-             }
+            //  if(!profilepic){
+            //     return {success:false, message: "please provide the profile pics"}
+            //  } 
              if(!userid){
                 return {success: false, message: "user not found "}
              }
@@ -40,6 +40,10 @@ class UserProfileServices {
              }else{
              const newprofile = new UserProfile();
              newprofile.profilepic = uploadresponse.secure_url;
+                newprofile.bio = bio;
+                newprofile.hourlyRate = hourlyRate;
+                newprofile.location = location;
+                newprofile.About = About;
              newprofile.user = user;
              await newprofile.save();
            
