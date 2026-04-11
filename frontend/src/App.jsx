@@ -13,6 +13,9 @@ import Notification from './pages/Notification/Notification'
 // import Usemessages from './authstore/messagesstore'
 import Authcontrol from './controlauth/authcontrol'
 import Usemessages from './controlauth/msgstroe'
+import MostRecent from './pages/mostRecent/MostRecent'
+import SavedJob from './pages/savedjobs/SavedJob'
+import BestMatches from './pages/BestMatches/BestMatches'
 // import Chat from './components/chatbox/Chat'
 
 
@@ -59,6 +62,10 @@ const App = () => {
             <Route path='/network' element={<Network/>}/>
             <Route path='/jobs' element={<Jobs/>}/>
             <Route path='/notification' element={<Notification/>}/>
+
+            <Route path='/mostrecent' element={<MostRecent/>} />
+            <Route path='/savedjobs' element={<SavedJob/>}/>
+            <Route path='/BestMatches' element={<BestMatches/>} />
           
         </Routes>
       

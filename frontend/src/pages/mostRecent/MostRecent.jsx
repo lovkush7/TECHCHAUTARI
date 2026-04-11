@@ -1,17 +1,17 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Nav from '../../components/freelancing/Navbar/Nav'
-import Freelancing from '../../components/FrelancingPage/Freelancing'
+import Most from '../../components/freelancing/MostRecent/most'
 
-const Jobs = () => {
+const MostRecent = () => {
   return (
     <div>
-        <Navbar/>
-        
-        
-        <Freelancing/>
+      <Navbar/>
+      <Nav/>
+       <Most/>
     </div>
   )
 }
 
-export default Jobs
+export default MostRecent
+

@@ -1,17 +1,14 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Nav from '../../components/freelancing/Navbar/Nav'
-import Freelancing from '../../components/FrelancingPage/Freelancing'
 
-const Jobs = () => {
+const SavedJob = () => {
   return (
     <div>
-        <Navbar/>
-        
-        
-        <Freelancing/>
+      <Navbar/>
+      <Nav/>
     </div>
   )
 }
 
-export default Jobs
+export default SavedJob
