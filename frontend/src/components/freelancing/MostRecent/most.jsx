@@ -4,6 +4,7 @@ import { CiLocationOff, CiLocationOn } from 'react-icons/ci'
 
 const Most = () => {
   const [isexplained , setIsexplained] = useState(false)
+  
   const jobs = [
     {
       id:"1",

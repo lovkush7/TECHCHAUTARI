@@ -13,11 +13,11 @@ const Nav = () => {
         <li className={menu === "/mostrecent"? " pb-1 border-b-2 border-black text-black transition" : ""} 
         onClick={()=>{navigate("/mostrecent")}}
         >
-           MostRecent 
+           Best matches
             </li>
         <li className={menu === "/BestMatches"? " pb-1 border-b-2 border-black text-black transition" : ""}
         onClick={()=>navigate("/BestMatches")} >
-            BestMatches
+            Most Recent
             </li>
         <li className={menu === "/savedjobs" ? "pb-1 border-b-2 border-black text-black transition" : ""  } 
         onClick={()=>navigate("/savedjobs")}>
